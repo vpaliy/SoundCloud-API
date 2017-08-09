@@ -1,4 +1,4 @@
-package com.vpaliy.soundcloud_api;
+package com.vpaliy.soundcloud;
 
 import org.junit.Test;
 

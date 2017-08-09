@@ -1,4 +1,4 @@
-package com.vpaliy.soundcloud_api.model;
+package com.vpaliy.soundcloud.model;
 
 /**
  * Created by vpaliy on 07/08/17.
