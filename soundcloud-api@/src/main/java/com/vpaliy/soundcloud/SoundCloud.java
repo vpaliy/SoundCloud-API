@@ -36,8 +36,7 @@ public class SoundCloud {
         this.clientId = clientId;
     }
 
-
-    private Interceptor provideOkHttpInterceptor(){
+    private Interceptor buildOkkHttpInterceptor(){
         return (chain -> {
             Request originalRequest = chain.request();
             HttpUrl originalHttpUrl = originalRequest.url();
@@ -47,14 +46,9 @@ public class SoundCloud {
                 builder.addEncodedQueryParameter(OAUTH_TOKEN,token.access);
             }
             HttpUrl newHttpUrl = builder.build();
-            Request newRequest = addHeader(originalRequest.newBuilder()
-                    .url(newHttpUrl)).build();
-
+            Request newRequest = originalRequest.newBuilder()
+                    .url(newHttpUrl).build();
             return chain.proceed(newRequest);});
-    }
-
-    private Request.Builder addHeader(Request.Builder builder){
-        return builder;
     }
 
     private OkHttpClient provideOkHttpClient(Context context, Interceptor interceptor) {
@@ -78,7 +72,7 @@ public class SoundCloud {
     }
 
     public SoundCloudService createService(Context context){
-        OkHttpClient okHttpClient=provideOkHttpClient(context,provideOkHttpInterceptor());
+        OkHttpClient okHttpClient=provideOkHttpClient(context, buildOkkHttpInterceptor());
         Retrofit retrofit=provideRetrofit(okHttpClient);
         return retrofit.create(SoundCloudService.class);
     }
