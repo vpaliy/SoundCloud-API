@@ -39,6 +39,7 @@ Basically, most of the calls will look like this one:
 
 ```java
 SoundCloudService service=SoundCloud.create(Config.CLIENT_ID)
+	.appendToken(token) //this is not mandatory, most of the calls do not require an access token
 	.createService(this); //just Context class
 service.fetchTrack("123456678") //some dummy track id
 	.subscribeOn(Schedulers.io())
@@ -92,16 +93,66 @@ SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(token->{
            //use your token 
-	   //launch another activity
+	   //launch another activity passing the token
 	   //or save using the shared preferences
+	   //eventually you will use the token to do this SoundCloud.appendToken(token)
         });
 ```
 2. In order to get an authorization code, you need to open their url in a `WebView`.
 A pop-up window will be opened allowing the user to log in to SoundCloud and approve your app's authorization request.
 
-To make the flow smoother, you can use a `redirect_uri` with a custom protocol scheme and set your app as a handler for that protocol scheme. 
-I did this for you, you just need to handle the response in your activity. 
+Approximately it will look like this:
 
+![](https://github.com/vpaliyX/SoundCloud-API/blob/master/art/sound_pop_up.png)
+
+To make the flow smoother, you can use a `redirect_uri` with a custom protocol scheme and set your app as a handler for that protocol scheme. 
+That's how you should set up your activity in the manifest file:
+```XML
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="app_name" 
+            android:host="soundcloud" 
+            android:pathPrefix="/redirect"/>
+    </intent-filter>
+</activity>
+```
+In the case above my `redirect_url` looks like this: `app_name://soundcloud/redirect`.
+
+Basically, I did this for you, you just need to handle the response in your activity. 
+That's how the entire process should look like:
+
+```java
+SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
+	.loginWithActivity(this,Config.REDIRECT_URI,REQUEST_CODE);
+```
+It launches the login activity(that popup), which returns the authorization code wrapped into Intent.class.
+You need to handle this in the `onActivityResult()` method. Here's an example:
+
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE){
+            if(resultCode==RESULT_OK){
+                String string=data.getDataString();
+                String code= Uri.parse(string).getQueryParameter("code");
+                //get your token
+                SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
+                        .addRedirectUri(Config.REDIRECT_URI)
+                        .tokenWithAuthCode(code)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(token->{
+
+                        });
+            }
+ 	}
+}
+```
+Once you have received your authorization code, request an access token as showed above.
 
 ``````
 MIT License
