@@ -27,21 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
         SoundCloud.create(Config.CLIENT_ID)
                 .createService(this)
-                .fetchTrackPage(1)
+                .fetchTrack("271990006")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Page<Track>>() {
+                .subscribe(new Action1<Track>() {
                     @Override
-                    public void call(Page<Track> page) {
-                        List<Track> tracks=page.collection;
-                        Log.d(TAG,"Next ref:"+page.next_href);
-                        if (tracks != null) {
-                            Log.d(TAG, "Size:" + tracks.size());
-                            for (Track track : tracks) {
-                                Log.d(TAG, track.title);
-                            }
-                        }else{
-                            Log.d(TAG,"null");
+                    public void call(Track track) {
+                        if (track != null) {
+                            Log.d(TAG, track.title);
+                            Log.d(TAG, track.id);
+                        } else {
+                            Log.d(TAG, "null");
                         }
                     }
                 }, new Action1<Throwable>() {

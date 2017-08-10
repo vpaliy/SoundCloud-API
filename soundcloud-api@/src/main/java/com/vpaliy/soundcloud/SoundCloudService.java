@@ -1,6 +1,9 @@
 package com.vpaliy.soundcloud;
 
+import com.vpaliy.soundcloud.model.Comment;
 import com.vpaliy.soundcloud.model.Page;
+import com.vpaliy.soundcloud.model.Playlist;
+import com.vpaliy.soundcloud.model.SecretToken;
 import com.vpaliy.soundcloud.model.Track;
 import com.vpaliy.soundcloud.model.User;
 
@@ -13,21 +16,47 @@ import retrofit2.http.QueryMap;
 import rx.Observable;
 
 public interface SoundCloudService {
-    @GET(Endpoints.ME)
-    Observable<User> fetchMe();
 
-    @GET(Endpoints.USERS)
-    Observable<List<User>> fetchUsers(@QueryMap Map<String,Object> options);
+    /** Tracks **/
 
     @GET(Endpoints.TRACKS)
-    Observable<List<Track>> fetchTracks(@QueryMap Map<String,Object> options);
+    Observable<List<Track>> searchTracks(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.TRACK_DETAILS)
-    Observable<Track> fetchTrackDetails(@Path("id") String id);
+    Observable<Track> fetchTrack(@Path("id") String id);
 
-    @GET(Endpoints.TRACK_DETAILS)
-    Observable<Track> fetchTrackDetails(@Path("id") String id,
-                                        @QueryMap Map<String,Object> options);
+    @GET(Endpoints.TRACK_COMMENTS)
+    Observable<List<Comment>> fetchTrackComments(@Path("id") String id);
 
+    @GET(Endpoints.TRACK_COMMENT)
+    Observable<Comment> fetchTrackComment(@Path("id") String id);
+
+    @GET(Endpoints.TRACK_FAVORITERS)
+    Observable<List<User>> fetchTrackFavoriters(@Path("id") String id);
+
+    @GET(Endpoints.TRACK_FAVORITER)
+    Observable<User> fetchTrackFavoriter(@Path("id") String id, @Path("user-id") String userId);
+
+    @GET(Endpoints.TRACK_SECRET_TOKEN)
+    Observable<SecretToken> fetchTrackSecretToken(@Path("id") String id);
+
+    /** Playlists **/
+
+    @GET(Endpoints.PLAYLISTS)
+    Observable<List<Playlist>> searchPlaylists(@QueryMap Map<String,Object> options);
+
+    @GET(Endpoints.PLAYLIST_DETAILS)
+    Observable<List<Playlist>> fetchPlaylist(@Path("id") String id);
+
+    @GET(Endpoints.PLAYLIST_TRACKS)
+    Observable<List<Track>> fetchPlaylistTracks(@Path("id") String id);
+
+    @GET(Endpoints.PLAYLIST_SECRET_TOKEN)
+    Observable<SecretToken> fetchPlaylistSecretToken(@Path("id") String id);
+
+    /** Users**/
+
+    @GET(Endpoints.USERS)
+    Observable<List<User>> searchUsers(@QueryMap Map<String,Object> options);
 
 }

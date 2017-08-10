@@ -2,9 +2,11 @@ package com.vpaliy.soundcloud.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-
+@SuppressWarnings("unused")
 public class Playlist {
     public String id;
     public String created_at;
@@ -43,7 +45,7 @@ public class Playlist {
     public MiniUser user;
     public List<Track> tracks;
 
-    public static class Type {
+    public static class PlaylistType {
         public static final String EP_SINGLE = "ep single";
         public static final String ALBUM = "album";
         public static final String COMPILATION = "compilation";
@@ -59,5 +61,42 @@ public class Playlist {
         public static final String ALL = "all";
         public static final String ME = "me";
         public static final String NONE = "none";
+    }
+
+    public enum  Representation{
+        ID("id"),
+        COMPACT("compact");
+        public String name;
+        Representation(String name){
+            this.name=name;
+        }
+    }
+
+    @SuppressWarnings({"unused","WeakerAccess"})
+    public static class Filter {
+
+        private Map<String,Object> options;
+
+        public Filter(){
+            options=new HashMap<>();
+        }
+
+        public Filter byRepresentation(Representation representation){
+            options.put("representation",representation.name);
+            return this;
+        }
+
+        public Filter byName(String name){
+            options.put("q",name);
+            return this;
+        }
+
+        public static Filter start(){
+            return new Filter();
+        }
+
+        public Map<String,Object> createOptions(){
+            return options;
+        }
     }
 }

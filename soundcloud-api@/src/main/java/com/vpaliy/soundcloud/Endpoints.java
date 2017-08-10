@@ -7,9 +7,10 @@ public interface Endpoints {
     String TRACKS              = "tracks";
     String TRACK_DETAILS       = "tracks/{id}";
     String TRACK_COMMENTS      = "tracks/{id}/comments";
+    String TRACK_COMMENT       = "tracks/{id}/comments/{comment-id}";
     String TRACK_FAVORITERS    = "tracks/{id}/favoriters";
-    String TRACK_PLAYS         = "tracks/{id}/plays";
-    String TRACK_PERMISSIONS   = "tracks/{id}/permissions";
+    String TRACK_FAVORITER     = "tracks/{id}/favoriters/{user-id}";
+    String TRACK_SECRET_TOKEN  = "tracks/{id}/secret-token";
 
     String PLAYLISTS            = "playlists";
     String PLAYLIST_DETAILS     = "playlists/{id}";
