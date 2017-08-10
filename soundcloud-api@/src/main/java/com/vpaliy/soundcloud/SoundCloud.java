@@ -2,6 +2,8 @@ package com.vpaliy.soundcloud;
 
 
 import android.content.Context;
+
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vpaliy.soundcloud.model.Token;
@@ -21,6 +23,7 @@ public class SoundCloud {
 
     private static final String BASE_URL="https://soundcloud.com/";
     private static final String API_QUERY = "client_id";
+    private static final String OAUTH_TOKEN="oauth_token";
 
     private static final long CACHE_SIZE = 10 * 1024 * 1024;
     private static final int CONNECT_TIMEOUT = 15;
@@ -42,9 +45,12 @@ public class SoundCloud {
         return (chain -> {
             Request originalRequest = chain.request();
             HttpUrl originalHttpUrl = originalRequest.url();
-            HttpUrl newHttpUrl = originalHttpUrl.newBuilder()
-                    .setQueryParameter(API_QUERY, clientId)
-                    .build();
+            HttpUrl.Builder builder=originalHttpUrl.newBuilder()
+                    .addEncodedQueryParameter(API_QUERY,clientId);
+            if(token!=null){
+                builder.addEncodedQueryParameter(OAUTH_TOKEN,token.access);
+            }
+            HttpUrl newHttpUrl = builder.build();
             Request newRequest = addHeader(originalRequest.newBuilder()
                     .url(newHttpUrl)).build();
 
@@ -68,11 +74,11 @@ public class SoundCloud {
 
     private Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         Gson gson = new GsonBuilder()
-                .setLenient()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl("https://api.soundcloud.com/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();

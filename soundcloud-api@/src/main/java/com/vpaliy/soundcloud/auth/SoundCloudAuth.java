@@ -1,8 +1,6 @@
 package com.vpaliy.soundcloud.auth;
 
 import android.text.TextUtils;
-
-import com.vpaliy.soundcloud.SoundCloud;
 import com.vpaliy.soundcloud.model.Token;
 import java.util.HashMap;
 import java.util.Map;

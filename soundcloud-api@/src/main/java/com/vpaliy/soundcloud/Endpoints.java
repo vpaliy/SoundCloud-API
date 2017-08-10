@@ -12,6 +12,12 @@ public interface Endpoints {
     String TRACK_PERMISSIONS   = "tracks/{id}/permissions";
 
     String PLAYLISTS            = "playlists";
+    String PLAYLISTS_ALBUMS     = "playlists?playlist_type=album";
+    String PLAYLISTS_DEMO       = "playlists?playlist_type=demo";
+    String PLAYLISTS_ARCHIVE    = "playlists?playlist_type=archive";
+    String PLAYLISTS_SHOWCASE   = "playlists?playlist_type=showcase";
+    String PLAYLISTS_COMPILATION = "playlists?playlist_type=compilation";
+    String PLAYLISTS_OTHER       = "playlists?playlist_type=other";
     String PLAYLIST_DETAILS     = "playlists/%d";
     String PLAYLIST_TRACKS      = "playlists/%d/tracks";
 
@@ -43,6 +49,8 @@ public interface Endpoints {
     String SUGGESTED_USERS     = "users/suggested";
 
     String RESOLVE             = "resolve";
+
+    String APPS                = "apps";
 
     String SEND_PASSWORD       = "passwords/reset-instructions";
     String CONNECT             = "connect";
