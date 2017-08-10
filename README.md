@@ -1,6 +1,6 @@
 # SoundCloud-API for Android.
 
-This project is a wrapper for the ![SoundCloud API](https://developers.soundcloud.com/).
+This project is a wrapper for the [SoundCloud API](https://developers.soundcloud.com/).
 
 The SoundCloud API exposes SoundCloud resources like *tracks*, *playlists*, *users*, *comments*, etc.
 The API gives you the ability to access a **sound's stream URL** and use your own player to play sounds from SoundCloud.
@@ -30,6 +30,78 @@ dependencies {
 }
 
 ```
+
+### Making Request ###
+You need to get your `client_id` and `client_secret` by registering your app [here](https://developers.soundcloud.com/docs/api/guide). After you have obtained that, you can start using the API.
+
+
+Basically, most of the calls will look like this one:
+
+```java
+SoundCloudService service=SoundCloud.create(Config.CLIENT_ID)
+	.createService(this); //just Context class
+service.fetchTrack("123456678") //some dummy track id
+	.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(track->{
+        	//do something with the track   
+ 	});
+```
+
+It's pretty simple. If you want to pass query paramaters, use the following structure:
+
+```java
+service.searchTracks(Track.Filter.start()
+              .byName("Imagine Dragons")
+              .byGenres("rock","indie","alternative")
+              .byTags("popular","rock","imagine","dragons")
+              .byLicense(Track.License.ALL_RIGHTS_RESERVED)
+              .byTypes(Track.Type.ORIGINAL, Track.Type.LIVE)
+              .limit(30)
+              .offset(10).createOptions())
+         .subscribeOn(Schedulers.io())
+         .observeOn(AndroidSchedulers.mainThread())
+         .subscribe(tracks->{
+          //do something     
+       });
+
+```
+The `Filter` class is a nested class inside of a model class like `User`, `Playlist` or `Track`. Most of them offer a different set of methods because not all models can be filtered in the same way. 
+Whenever you need to filter a request, just use the `Filter` class and its available methods. After you've listed all things you need, just call the `Filter.createOptions()` method.
+
+
+## Authentication ##
+
+SoundCloud authentication uses **OAuth 2.0**, a popular open standard used by many popular API providers. 
+OAuth 2.0 allows users to authorize your application without disclosing their username and password. 
+
+I've created a class called `SoundCloudAuth` which is responsible for the authentication. 
+The main purpose of this class is to obtain an **access token** for your app. 
+
+There are 3 ways you can do this:
+- with the authorization code
+- with user's credentials (username, password)
+- refresh token 
+
+1. Use crentials to obtain a token:
+```java
+SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
+	.addRedirectUri(Config.REDIRECT_URI)
+        .tokenWithCredentials("username","password")
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(token->{
+           //use your token 
+	   //launch another activity
+	   //or save using the shared preferences
+        });
+```
+2. In order to get an authorization code, you need to open their url in a `WebView`.
+A pop-up window will be opened allowing the user to log in to SoundCloud and approve your app's authorization request.
+
+To make the flow smoother, you can use a `redirect_uri` with a custom protocol scheme and set your app as a handler for that protocol scheme. 
+I did this for you, you just need to handle the response in your activity. 
+
 
 ``````
 MIT License
