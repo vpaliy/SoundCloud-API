@@ -1,6 +1,10 @@
 package com.vpaliy.soundcloud.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Track {
@@ -103,6 +107,7 @@ public class Track {
         }
     }
 
+
     public enum State {
 
         PROCESSING("processing"),
@@ -121,14 +126,14 @@ public class Track {
         }
     }
 
-    public enum Filter {
+    public enum Visibility {
         ALL("all"),
         PUBLIC("public"),
         PRIVATE("private");
 
         private final String filter;
 
-        Filter(String filter) {
+        Visibility(String filter) {
             this.filter = filter;
         }
 
@@ -153,6 +158,102 @@ public class Track {
         @Override
         public String toString() {
             return embeddableBy;
+        }
+    }
+
+    @SuppressWarnings({"WeakerAccess"})
+    public static class Filter {
+        private Map<String,Object> options;
+
+        public Filter(){
+            options=new HashMap<>();
+        }
+
+        public Filter byName(String name){
+            options.put("q",name);
+            return this;
+        }
+
+        public Filter limit(int limit){
+            options.put("limit",limit);
+            return this;
+        }
+
+        public Filter offset(int offset){
+            options.put("offset",offset);
+            return this;
+        }
+
+        public Filter byGenres(String... genres){
+            if(genres!=null) {
+                options.put("genres", convert(genres));
+            }
+            return this;
+        }
+
+        public Filter byTags(String...tags){
+            if(tags!=null) {
+                options.put("tags", convert(tags));
+            }
+            return this;
+        }
+
+        public Filter byLicense(License license){
+            if(license!=null){
+                options.put("license",license.license);
+            }
+            return this;
+        }
+
+        public Filter byTypes(Type...types){
+            if(types!=null){
+                options.put("types",convert(types));
+            }
+            return this;
+        }
+
+        public Filter byBPM(int from, int to){
+            options.put("bpm[from]",from);
+            options.put("bpm[to]",to);
+            return this;
+        }
+
+        public Filter byVisibility(Visibility visibility){
+            if(visibility!=null){
+                options.put("filter",visibility.filter);
+            }
+            return this;
+        }
+
+        @SuppressWarnings("all")
+        private <T> String convert(T...strings){
+            return Arrays.toString(strings)
+                    .replaceAll("[\\[.\\].\\s+]", "");
+        }
+
+        public Filter byTime(Date from, Date to){
+            options.put("created_at[from]",from);
+            options.put("created_at[to]",to);
+            return this;
+        }
+
+        public Filter byDuration(int fromMillis, int toMillis){
+            options.put("duration[from]",fromMillis);
+            options.put("duration[to]",toMillis);
+            return this;
+        }
+
+        public Filter byIds(String...ids){
+            options.put("ids",convert(ids));
+            return this;
+        }
+
+        public Map<String,Object> createOptions(){
+            return options;
+        }
+
+        public static Filter start(){
+            return new Filter();
         }
     }
 }

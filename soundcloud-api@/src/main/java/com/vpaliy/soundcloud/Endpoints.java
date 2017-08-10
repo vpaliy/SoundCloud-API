@@ -12,39 +12,34 @@ public interface Endpoints {
     String TRACK_PERMISSIONS   = "tracks/{id}/permissions";
 
     String PLAYLISTS            = "playlists";
-    String PLAYLISTS_ALBUMS     = "playlists?playlist_type=album";
-    String PLAYLISTS_DEMO       = "playlists?playlist_type=demo";
-    String PLAYLISTS_ARCHIVE    = "playlists?playlist_type=archive";
-    String PLAYLISTS_SHOWCASE   = "playlists?playlist_type=showcase";
-    String PLAYLISTS_COMPILATION = "playlists?playlist_type=compilation";
-    String PLAYLISTS_OTHER       = "playlists?playlist_type=other";
-    String PLAYLIST_DETAILS     = "playlists/%d";
-    String PLAYLIST_TRACKS      = "playlists/%d/tracks";
+    String PLAYLIST_DETAILS     = "playlists/{id}";
+    String PLAYLIST_SECRET_TOKEN= "playlists/{id}/secret-token";
+    String PLAYLIST_TRACKS      = "playlists/{id}/tracks";
 
     String USERS               = "users";
-    String USER_DETAILS        = "users/%d";
-    String USER_FOLLOWINGS     = "users/%d/followings";
-    String USER_FOLLOWERS      = "users/%d/followers";
-    String USER_TRACKS         = "users/%d/tracks";
-    String USER_FAVORITES      = "users/%d/favorites";
-    String USER_PLAYLISTS      = "users/%d/playlists";
+    String USER_DETAILS        = "users/{id}";
+    String USER_FOLLOWINGS     = "users/{id}/followings";
+    String USER_FOLLOWERS      = "users/{id}/followers";
+    String USER_TRACKS         = "users/{id}/tracks";
+    String USER_FAVORITES      = "users/{id}/favorites";
+    String USER_PLAYLISTS      = "users/{id}/playlists";
 
-    String MY_DETAILS          = "me";
-    String MY_CONNECTIONS      = "me/connections";
-    String MY_ACTIVITIES       = "me/activities/tracks";
-    String MY_EXCLUSIVE_TRACKS = "me/activities/tracks/exclusive";
-    String MY_NEWS             = "me/activities/all/own";
-    String MY_TRACKS           = "me/tracks";
-    String MY_PLAYLISTS        = "me/playlists";
-    String MY_FAVORITES        = "me/favorites";
-    String MY_FAVORITE         = "me/favorites/%d";
-    String MY_FOLLOWERS        = "me/followers";
-    String MY_FOLLOWER         = "me/followers/%d";
-    String MY_FOLLOWINGS       = "me/followings";
-    String MY_FOLLOWING        = "me/followings/%d";
-    String MY_CONFIRMATION     = "me/email-confirmations";
-    String MY_FRIENDS          = "me/connections/friends";
-    String MY_DEVICES          = "me/devices";
+    String ME                  = "me";
+    String ME_CONNECTIONS      = "me/connections";
+    String ME_ACTIVITIES       = "me/activities/tracks";
+    String ME_EXCLUSIVE_TRACKS = "me/activities/tracks/exclusive";
+    String ME_NEWS             = "me/activities/all/own";
+    String ME_TRACKS           = "me/tracks";
+    String ME_PLAYLISTS        = "me/playlists";
+    String ME_FAVORITES        = "me/favorites";
+    String ME_FAVORITE         = "me/favorites/{id}";
+    String ME_FOLLOWERS        = "me/followers";
+    String ME_FOLLOWER         = "me/followers/{id}";
+    String ME_FOLLOWINGS       = "me/followings";
+    String ME_FOLLOWING        = "me/followings/{id}";
+    String ME_CONFIRMATION     = "me/email-confirmations";
+    String ME_FRIENDS          = "me/connections/friends";
+    String ME_DEVICES          = "me/devices";
 
     String SUGGESTED_USERS     = "users/suggested";
 
@@ -55,6 +50,4 @@ public interface Endpoints {
     String SEND_PASSWORD       = "passwords/reset-instructions";
     String CONNECT             = "connect";
     String FACEBOOK_CONNECT    = "connect/via/facebook";
-
-
 }

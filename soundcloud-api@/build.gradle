@@ -31,5 +31,6 @@ dependencies {
     compile libs.gson
     compile libs.RxAndroid
     compile libs.javaxAnnotation
+    compile libs.supportAppCompat
     testCompile testLibs.jUnit
 }
