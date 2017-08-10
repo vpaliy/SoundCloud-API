@@ -1,5 +1,8 @@
 package com.vpaliy.soundcloud.auth;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import com.vpaliy.soundcloud.model.Token;
 import java.util.HashMap;
@@ -130,6 +133,23 @@ public class SoundCloudAuth {
             fieldMap.put(REDIRECT_URI, redirectUri);
         }
         return service.requestToken(fieldMap);
+    }
+
+    public void loginWithActivity(Activity activity, String redirectUri, int requestCode){
+        if(TextUtils.isEmpty(redirectUri)){
+            throw new IllegalArgumentException("redirectUri is empty");
+        }
+        String url="https://www.soundcloud.com/connect?" +
+                "client_id=" + clientId +
+                "&redirect_uri=" + redirectUri +
+                "&response_type=" + "code" +
+                "&scope=" + "non-expiring" +
+                "&display=" + "popup" +
+                "&state=" + "asdf";
+        Connect connect=new Connect(url,redirectUri);
+        Intent intent=new Intent(activity,LoginActivity.class);
+        intent.putExtra(LoginActivity.EXTRA_CONNECT_DATA,connect);
+        activity.startActivityForResult(intent,requestCode);
     }
 
     public static SoundCloudAuth create(String clientId,String clientSecret){
