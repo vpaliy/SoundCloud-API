@@ -32,17 +32,10 @@ public interface Endpoints {
 
     String ME                  = "me";
     String ME_CONNECTIONS      = "me/connections";
+    String ME_CONNECTION       = "me/connections/{id}";
     String ME_ACTIVITIES       = "me/activities/tracks";
     String ME_EXCLUSIVE_TRACKS = "me/activities/tracks/exclusive";
     String ME_NEWS             = "me/activities/all/own";
-    String ME_TRACKS           = "me/tracks";
-    String ME_PLAYLISTS        = "me/playlists";
-    String ME_FAVORITES        = "me/favorites";
-    String ME_FAVORITE         = "me/favorites/{id}";
-    String ME_FOLLOWERS        = "me/followers";
-    String ME_FOLLOWER         = "me/followers/{id}";
-    String ME_FOLLOWINGS       = "me/followings";
-    String ME_FOLLOWING        = "me/followings/{id}";
     String ME_CONFIRMATION     = "me/email-confirmations";
     String ME_FRIENDS          = "me/connections/friends";
     String ME_DEVICES          = "me/devices";

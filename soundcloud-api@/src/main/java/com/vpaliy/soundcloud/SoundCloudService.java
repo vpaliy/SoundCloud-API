@@ -1,6 +1,9 @@
 package com.vpaliy.soundcloud;
 
+import com.vpaliy.soundcloud.model.MyActivity;
 import com.vpaliy.soundcloud.model.Comment;
+import com.vpaliy.soundcloud.model.Connection;
+import com.vpaliy.soundcloud.model.Page;
 import com.vpaliy.soundcloud.model.Playlist;
 import com.vpaliy.soundcloud.model.SecretToken;
 import com.vpaliy.soundcloud.model.Track;
@@ -90,4 +93,22 @@ public interface SoundCloudService {
 
     @GET(Endpoints.USER_WEB_PROFILES)
     Observable<List<WebProfile>> fetchUserWebProfiles(@Path("id") String id);
+
+
+    /* ME */
+
+    @GET(Endpoints.ME)
+    Observable<User> me();
+
+    @GET(Endpoints.ME_ACTIVITIES)
+    Observable<List<Connection>> fetchMyConnections();
+
+    @GET(Endpoints.ME_CONNECTION)
+    Observable<Connection> fetchMyConnection(@Path("id") String connectionId);
+
+    @GET(Endpoints.ME_ACTIVITIES)
+    Observable<Page<MyActivity>> fetchMyActivities();
+
+    @GET(Endpoints.SUGGESTED_USERS)
+    Observable<List<User>> fetchSuggestedUsers();
 }
