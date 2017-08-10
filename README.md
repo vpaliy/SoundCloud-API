@@ -80,11 +80,11 @@ I've created a class called `SoundCloudAuth` which is responsible for the authen
 The main purpose of this class is to obtain an **access token** for your app. 
 
 There are 3 ways you can do this:
-- with the authorization code
 - with user's credentials (username, password)
+- with the authorization code
 - refresh token 
 
-1. Use crentials to obtain a token:
+**1.** Use crentials to obtain a token:
 ```java
 SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
 	.addRedirectUri(Config.REDIRECT_URI)
@@ -98,7 +98,7 @@ SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
 	   //eventually you will use the token to do this SoundCloud.appendToken(token)
         });
 ```
-2. In order to get an authorization code, you need to open their url in a `WebView`.
+**2**. In order to get an authorization code, you need to open their url in a `WebView`.
 A pop-up window will be opened allowing the user to log in to SoundCloud and approve your app's authorization request.
 
 Approximately it will look like this:
@@ -154,7 +154,19 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 Once you have received your authorization code, request an access token as showed above.
 
+**3**.If you received your token from using user's credentials, you will need to periodically refresh your access token when it expires. In order to achieve that, just call this method:
+
+```java
+SoundCloudAuth.create(Config.CLIENT_ID, Config.CLIENT_SECRET_ID)
+	.refreshToken(expiredToken)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(token->{
+	   //use your token here
+        });
+```
 ``````
+
 MIT License
 
 Copyright (c) 2017 Vasyl Paliy
