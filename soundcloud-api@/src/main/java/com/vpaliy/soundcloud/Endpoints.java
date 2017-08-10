@@ -21,9 +21,14 @@ public interface Endpoints {
     String USER_DETAILS        = "users/{id}";
     String USER_FOLLOWINGS     = "users/{id}/followings";
     String USER_FOLLOWERS      = "users/{id}/followers";
+    String USER_FOLLOWING      = "users/{id}/followings/{following-id}";
+    String USER_FOLLOWER       = "users/{id}/followers/{follower-id}";
     String USER_TRACKS         = "users/{id}/tracks";
+    String USER_COMMENTS       = "user/{id}/comments";
     String USER_FAVORITES      = "users/{id}/favorites";
+    String USER_FAVORITE       = "users/{id}/favorite/{favorite-id}";
     String USER_PLAYLISTS      = "users/{id}/playlists";
+    String USER_WEB_PROFILES   = "users/{id}/web-profiles";
 
     String ME                  = "me";
     String ME_CONNECTIONS      = "me/connections";
