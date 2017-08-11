@@ -85,7 +85,7 @@ There are 3 ways you can do this:
 - with the authorization code
 - refresh token 
 
-**1.** Use crentials to obtain a token:
+**1.** Use the credentials to obtain a token:
 ```java
 SoundCloudAuth.create(Config.CLIENT_ID,Config.CLIENT_SECRET_ID)
 	.addRedirectUri(Config.REDIRECT_URI)
