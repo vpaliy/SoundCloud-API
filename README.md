@@ -5,7 +5,8 @@ This project is a wrapper for the [SoundCloud API](https://developers.soundcloud
 The SoundCloud API exposes SoundCloud resources like *tracks*, *playlists*, *users*, *comments*, etc.
 The API gives you the ability to access a **sound's stream URL** and use your own player to play sounds from SoundCloud.
 
-This repository uses Retrofit2 to create Java interfaces from API endpoints.
+This repository uses Retrofit2 to create Java interfaces from API endpoints. It returns an `Observable` which makes it very easy 
+to handle asynchronous operations and you can convert an existing data structure into another Observable . Please, refer to [Observable Utility Operators](https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators) for more details.  
 
 ## How do I use this wrapper? ##
 
@@ -165,8 +166,16 @@ SoundCloudAuth.create(Config.CLIENT_ID, Config.CLIENT_SECRET_ID)
 	   //use your token here
         });
 ```
-``````
 
+## Additional Documentation and Support ##
+- The [SoundCloud API Documentation](https://developers.soundcloud.com/docs/api/reference).
+- The [SoundCloud API Discussion Group](https://groups.google.com/forum/#!forum/soundcloudapi).
+- If you have any questions or you have found some issues, feel free to write in the [Issue Section](https://github.com/vpaliyX/SoundCloud-API/issues).
+
+
+## The End. ##
+
+``````
 MIT License
 
 Copyright (c) 2017 Vasyl Paliy
