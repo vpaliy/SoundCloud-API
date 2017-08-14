@@ -1,4 +1,5 @@
 # SoundCloud-API for Android.
+[![](https://jitpack.io/v/vpaliyX/SoundCloud-API.svg)](https://jitpack.io/#vpaliyX/SoundCloud-API)
 
 This project is a wrapper for the [SoundCloud API](https://developers.soundcloud.com/).
 
@@ -27,7 +28,7 @@ Add the dependency
 
 ``` gradle
 dependencies {
-	compile 'com.github.vpaliyX:SoundCloud-API:v1.0'
+	compile 'com.github.vpaliyX:SoundCloud-API:v1.1'
 }
 
 ```
