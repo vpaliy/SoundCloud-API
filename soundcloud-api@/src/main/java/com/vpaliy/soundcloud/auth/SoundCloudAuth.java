@@ -1,12 +1,13 @@
 package com.vpaliy.soundcloud.auth;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import com.vpaliy.soundcloud.model.Token;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -14,7 +15,6 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 
 @SuppressWarnings({"unused"})
 public class SoundCloudAuth {
@@ -87,7 +87,7 @@ public class SoundCloudAuth {
         return buildRetrofit().create(AuthService.class);
     }
 
-    public Observable<Token> tokenWithAuthCode(String code){
+    public Single<Token> tokenWithAuthCode(String code){
         if(TextUtils.isEmpty(code)){
             throw new IllegalArgumentException("auth is empty");
         }
@@ -102,7 +102,7 @@ public class SoundCloudAuth {
         }
         return service.requestToken(fieldMap);
     }
-    public Observable<Token> tokenWithCredentials(String username, String password){
+    public Single<Token> tokenWithCredentials(String username, String password){
         if(TextUtils.isEmpty(username)||TextUtils.isEmpty(password)){
             throw new IllegalArgumentException("username or password is null");
         }
@@ -119,7 +119,7 @@ public class SoundCloudAuth {
         return service.requestToken(fieldMap);
     }
 
-    public Observable<Token> refreshToken(Token token){
+    public Single<Token> refreshToken(Token token){
         if(token==null||TextUtils.isEmpty(token.refresh)){
             throw new IllegalArgumentException("Wrong token");
         }

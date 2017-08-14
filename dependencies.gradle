@@ -16,8 +16,8 @@ ext {
     /* Library versions */
     butterKnifeVersion = "8.5.1"
     supportVersion = "25.1.0"
-    rxJavaVersion = '1.1.8'
-    rxAndroidVersion = '1.2.1'
+    rxJavaVersion = '2.0.2'
+    rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
     gsonVersion = '2.3'
     okHttpVersion = '2.5.0'
@@ -45,9 +45,8 @@ ext {
             supportDesign      : "com.android.support:design:${supportVersion}",
             butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-            recyclerView       : "com.android.support:recyclerview-v7:${supportVersion}",
-            RxJava             : "io.reactivex:rxjava:${rxJavaVersion}",
-            RxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            RxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            RxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             gson               : "com.google.code.gson:gson:${gsonVersion}",
             okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
@@ -60,9 +59,7 @@ ext {
 
     testDependencies = [
             jUnit :             "junit:junit:${jUnitVersion}",
-            robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
     ]
 }
