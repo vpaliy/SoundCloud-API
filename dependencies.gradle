@@ -23,7 +23,7 @@ ext {
     okHttpVersion = '2.5.0'
     retrofitVersion="2.2.0"
     retrofitConverterVersion="2.1.0"
-    retrofitAdapterVersion="2.1.0"
+    retrofitAdapterVersion="2.2.0"
     constraintLayoutVersion="1.0.2"
 
 
@@ -52,7 +52,7 @@ ext {
             okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
             retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter  : "com.squareup.retrofit2:converter-gson:${retrofitConverterVersion}",
-            retrofitAdapter    : "com.squareup.retrofit2:adapter-rxjava:${retrofitAdapterVersion}",
+            retrofitAdapter    : 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
             leakCanary         :"com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
             constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
     ]

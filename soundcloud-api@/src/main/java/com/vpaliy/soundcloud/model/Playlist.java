@@ -91,6 +91,16 @@ public class Playlist {
             return this;
         }
 
+        public Filter limit(int limit){
+            options.put("limit",limit);
+            return this;
+        }
+
+        public Filter offset(int offset){
+            options.put("offset",offset);
+            return this;
+        }
+
         public static Filter start(){
             return new Filter();
         }
