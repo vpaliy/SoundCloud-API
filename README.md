@@ -5,8 +5,8 @@ This project is a wrapper for the [SoundCloud API](https://developers.soundcloud
 The SoundCloud API exposes SoundCloud resources like *tracks*, *playlists*, *users*, *comments*, etc.
 The API gives you the ability to access a **sound's stream URL** and use your own player to play sounds from SoundCloud.
 
-This repository uses Retrofit2 to create Java interfaces from API endpoints. It returns an `Observable` which makes it very easy 
-to handle asynchronous operations and you can convert an existing data structure into another Observable . Please, refer to [Observable Utility Operators](https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators) for more details.  
+This repository uses Retrofit2 to create Java interfaces from API endpoints. It returns a `Single` which makes it very easy 
+to handle asynchronous operations and you can convert an existing data structure into another Single . Please, refer to [Single Utility Operators](http://reactivex.io/documentation/single.html) for more details.  
 
 ## How do I use this wrapper? ##
 
