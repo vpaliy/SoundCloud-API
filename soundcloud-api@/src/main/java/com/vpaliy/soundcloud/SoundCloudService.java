@@ -49,7 +49,7 @@ public interface SoundCloudService {
     Single<List<PlaylistEntity>> searchPlaylists(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.PLAYLIST_DETAILS)
-    Single<List<PlaylistEntity>> fetchPlaylist(@Path("id") String id);
+    Single<PlaylistEntity> fetchPlaylist(@Path("id") String id);
 
     @GET(Endpoints.PLAYLIST_TRACKS)
     Single<List<TrackEntity>> fetchPlaylistTracks(@Path("id") String id);
