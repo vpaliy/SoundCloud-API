@@ -1,6 +1,6 @@
 package com.vpaliy.soundcloud.model;
 
-public class MiniUser {
+public class MiniUserEntity {
     public String avatar_url;
     public String id;
     public String kind;

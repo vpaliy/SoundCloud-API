@@ -1,6 +1,6 @@
 package com.vpaliy.soundcloud.model;
 
-public class MyActivity {
+public class MyActivityEntity {
 
     public String type;
     public String created_at;
@@ -9,8 +9,8 @@ public class MyActivity {
     public Origin origin;
 
     public class Origin{
-        public Track track;
-        public Comment comment;
-        public MiniUser miniUser;
+        public TrackEntity track;
+        public CommentEntity comment;
+        public MiniUserEntity miniUser;
     }
 }

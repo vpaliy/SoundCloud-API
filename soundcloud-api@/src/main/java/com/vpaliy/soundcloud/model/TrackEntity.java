@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class Track {
+public class TrackEntity {
 
     public String id;
     public String created_at;
     public String user_id;
-    public MiniUser user;
+    public MiniUserEntity user;
     public String title;
     public String permalink;
     public String permalink_url;

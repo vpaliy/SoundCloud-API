@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class UserEntity {
     public String id;
     public String permalink;
     public String username;

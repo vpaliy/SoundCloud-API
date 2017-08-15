@@ -1,6 +1,6 @@
 package com.vpaliy.soundcloud.model;
 
-public class Connection {
+public class ConnectionEntity {
     public String created_at;
     public String display_name;
     public String id;

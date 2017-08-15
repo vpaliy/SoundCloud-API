@@ -1,15 +1,15 @@
 package com.vpaliy.soundcloud;
 
-import com.vpaliy.soundcloud.model.App;
-import com.vpaliy.soundcloud.model.MyActivity;
-import com.vpaliy.soundcloud.model.Comment;
-import com.vpaliy.soundcloud.model.Connection;
+import com.vpaliy.soundcloud.model.AppEntity;
+import com.vpaliy.soundcloud.model.MyActivityEntity;
+import com.vpaliy.soundcloud.model.CommentEntity;
+import com.vpaliy.soundcloud.model.ConnectionEntity;
 import com.vpaliy.soundcloud.model.Page;
-import com.vpaliy.soundcloud.model.Playlist;
+import com.vpaliy.soundcloud.model.PlaylistEntity;
 import com.vpaliy.soundcloud.model.SecretToken;
-import com.vpaliy.soundcloud.model.Track;
-import com.vpaliy.soundcloud.model.User;
-import com.vpaliy.soundcloud.model.WebProfile;
+import com.vpaliy.soundcloud.model.TrackEntity;
+import com.vpaliy.soundcloud.model.UserEntity;
+import com.vpaliy.soundcloud.model.WebProfileEntity;
 import java.util.List;
 import java.util.Map;
 import io.reactivex.Single;
@@ -23,22 +23,22 @@ public interface SoundCloudService {
     /** Tracks **/
 
     @GET(Endpoints.TRACKS)
-    Single<List<Track>> searchTracks(@QueryMap Map<String,Object> options);
+    Single<List<TrackEntity>> searchTracks(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.TRACK_DETAILS)
-    Single<Track> fetchTrack(@Path("id") String id);
+    Single<TrackEntity> fetchTrack(@Path("id") String id);
 
     @GET(Endpoints.TRACK_COMMENTS)
-    Single<List<Comment>> fetchTrackComments(@Path("id") String id);
+    Single<List<CommentEntity>> fetchTrackComments(@Path("id") String id);
 
     @GET(Endpoints.TRACK_COMMENT)
-    Single<Comment> fetchTrackComment(@Path("id") String id);
+    Single<CommentEntity> fetchTrackComment(@Path("id") String id);
 
     @GET(Endpoints.TRACK_FAVORITERS)
-    Single<List<User>> fetchTrackFavoriters(@Path("id") String id);
+    Single<List<UserEntity>> fetchTrackFavoriters(@Path("id") String id);
 
     @GET(Endpoints.TRACK_FAVORITER)
-    Single<User> fetchTrackFavoriter(@Path("id") String id, @Path("user-id") String userId);
+    Single<UserEntity> fetchTrackFavoriter(@Path("id") String id, @Path("user-id") String userId);
 
     @GET(Endpoints.TRACK_SECRET_TOKEN)
     Single<SecretToken> fetchTrackSecretToken(@Path("id") String id);
@@ -46,13 +46,13 @@ public interface SoundCloudService {
     /** Playlists **/
 
     @GET(Endpoints.PLAYLISTS)
-    Single<List<Playlist>> searchPlaylists(@QueryMap Map<String,Object> options);
+    Single<List<PlaylistEntity>> searchPlaylists(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.PLAYLIST_DETAILS)
-    Single<List<Playlist>> fetchPlaylist(@Path("id") String id);
+    Single<List<PlaylistEntity>> fetchPlaylist(@Path("id") String id);
 
     @GET(Endpoints.PLAYLIST_TRACKS)
-    Single<List<Track>> fetchPlaylistTracks(@Path("id") String id);
+    Single<List<TrackEntity>> fetchPlaylistTracks(@Path("id") String id);
 
     @GET(Endpoints.PLAYLIST_SECRET_TOKEN)
     Single<SecretToken> fetchPlaylistSecretToken(@Path("id") String id);
@@ -60,61 +60,61 @@ public interface SoundCloudService {
     /** Users**/
 
     @GET(Endpoints.USERS)
-    Single<List<User>> searchUsers(@QueryMap Map<String,Object> options);
+    Single<List<UserEntity>> searchUsers(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.USER_DETAILS)
-    Single<User> fetchUser(@Path("id") String id);
+    Single<UserEntity> fetchUser(@Path("id") String id);
 
     @GET(Endpoints.USER_TRACKS)
-    Single<List<Track>> fetchUserTracks(@Path("id") String id);
+    Single<List<TrackEntity>> fetchUserTracks(@Path("id") String id);
 
     @GET(Endpoints.USER_PLAYLISTS)
-    Single<List<Playlist>> fetchUserPlaylists(@Path("id") String id);
+    Single<List<PlaylistEntity>> fetchUserPlaylists(@Path("id") String id);
 
     @GET(Endpoints.USER_FOLLOWERS)
-    Single<List<User>> fetchUserFollowers(@Path("id") String id);
+    Single<List<UserEntity>> fetchUserFollowers(@Path("id") String id);
 
     @GET(Endpoints.USER_FOLLOWINGS)
-    Single<List<User>> fetchUserFollowings(@Path("id") String id);
+    Single<List<UserEntity>> fetchUserFollowings(@Path("id") String id);
 
     @GET(Endpoints.USER_FOLLOWER)
-    Single<User> fetchUserFollower(@Path("id") String userId, @Path("follower-id") String followerId);
+    Single<UserEntity> fetchUserFollower(@Path("id") String userId, @Path("follower-id") String followerId);
 
     @GET(Endpoints.USER_FOLLOWING)
-    Single<User> fetchUserFollowing(@Path("id") String userId, @Path("following-id") String followingId);
+    Single<UserEntity> fetchUserFollowing(@Path("id") String userId, @Path("following-id") String followingId);
 
     @GET(Endpoints.USER_COMMENTS)
-    Single<List<Comment>> fetchUserComments(@Path("id") String id);
+    Single<List<CommentEntity>> fetchUserComments(@Path("id") String id);
 
     @GET(Endpoints.USER_FAVORITES)
-    Single<List<Track>> fetchUserFavoriteTracks(@Path("id") String id);
+    Single<List<TrackEntity>> fetchUserFavoriteTracks(@Path("id") String id);
 
     @GET(Endpoints.USER_FAVORITE)
-    Single<Track> fetchUserFavoriteTrack(@Path("id") String id,@Path("favorite-id") String trackId);
+    Single<TrackEntity> fetchUserFavoriteTrack(@Path("id") String id, @Path("favorite-id") String trackId);
 
     @GET(Endpoints.USER_WEB_PROFILES)
-    Single<List<WebProfile>> fetchUserWebProfiles(@Path("id") String id);
+    Single<List<WebProfileEntity>> fetchUserWebProfiles(@Path("id") String id);
 
 
     /** ME **/
 
     @GET(Endpoints.ME)
-    Single<User> me();
+    Single<UserEntity> me();
 
     @GET(Endpoints.ME_ACTIVITIES)
-    Single<List<Connection>> fetchMyConnections();
+    Single<List<ConnectionEntity>> fetchMyConnections();
 
     @GET(Endpoints.ME_CONNECTION)
-    Single<Connection> fetchMyConnection(@Path("id") String connectionId);
+    Single<ConnectionEntity> fetchMyConnection(@Path("id") String connectionId);
 
     @GET(Endpoints.ME_ACTIVITIES)
-    Single<Page<MyActivity>> fetchMyActivities();
+    Single<Page<MyActivityEntity>> fetchMyActivities();
 
     @GET(Endpoints.SUGGESTED_USERS)
-    Single<List<User>> fetchSuggestedUsers();
+    Single<List<UserEntity>> fetchSuggestedUsers();
 
     /** APPS **/
 
     @GET(Endpoints.APPS)
-    Single<List<App>> fetchApps();
+    Single<List<AppEntity>> fetchApps();
 }

@@ -1,6 +1,6 @@
 package com.vpaliy.soundcloud.model;
 
-public class App {
+public class AppEntity {
     public String id;
     public String kind;
     public String name;

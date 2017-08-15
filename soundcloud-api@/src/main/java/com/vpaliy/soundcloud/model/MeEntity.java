@@ -2,7 +2,7 @@ package com.vpaliy.soundcloud.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Me extends User{
+public class MeEntity extends UserEntity {
 
     public String plan;
     public long private_tracks_count;

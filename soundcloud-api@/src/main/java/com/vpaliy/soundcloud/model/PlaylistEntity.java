@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class Playlist {
+public class PlaylistEntity {
     public String id;
     public String created_at;
     public String user_id;
@@ -42,8 +42,8 @@ public class Playlist {
     public String uri;
     public String permalink_url;
     public String artwork_url;
-    public MiniUser user;
-    public List<Track> tracks;
+    public MiniUserEntity user;
+    public List<TrackEntity> tracks;
 
     public static class PlaylistType {
         public static final String EP_SINGLE = "ep single";

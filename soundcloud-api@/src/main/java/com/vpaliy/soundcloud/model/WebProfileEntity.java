@@ -1,6 +1,6 @@
 package com.vpaliy.soundcloud.model;
 
-public class WebProfile {
+public class WebProfileEntity {
     private String kind;
     private String id;
     private String service;
