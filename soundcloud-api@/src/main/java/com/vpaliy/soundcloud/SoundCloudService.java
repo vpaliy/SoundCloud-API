@@ -72,7 +72,7 @@ public interface SoundCloudService {
     Single<List<PlaylistEntity>> fetchUserPlaylists(@Path("id") String id);
 
     @GET(Endpoints.USER_FOLLOWERS)
-    Single<List<UserEntity>> fetchUserFollowers(@Path("id") String id);
+    Single<Page<UserEntity>> fetchUserFollowers(@Path("id") String id);
 
     @GET(Endpoints.USER_FOLLOWINGS)
     Single<List<UserEntity>> fetchUserFollowings(@Path("id") String id);
