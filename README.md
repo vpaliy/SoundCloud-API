@@ -168,10 +168,39 @@ SoundCloudAuth.create(Config.CLIENT_ID, Config.CLIENT_SECRET_ID)
         });
 ```
 
-## Additional Documentation and Support ##
+## Additional Documentation And Support ##
 - The [SoundCloud API Documentation](https://developers.soundcloud.com/docs/api/reference).
 - The [SoundCloud API Discussion Group](https://groups.google.com/forum/#!forum/soundcloudapi).
 - If you have any questions or you have found some issues, feel free to write in the [Issue Section](https://github.com/vpaliyX/SoundCloud-API/issues).
+
+## Even More Examples  ## 
+Let's suppose that you want to fetch playlists and you have an array of different names; you can solve the problem this way:
+
+```java
+ //just a dummy Single object
+ Single<List<PlaylistEntity>> start = Single.just(new LinkedList<>());
+ 	for(String name:names){
+	    //combine all of them 
+	    start=Single.zip(start,service.searchPlaylists(PlaylistEntity
+            	.Filter.start()
+                .byName(name)
+                .createOptions())
+		//if an error occurs, we want to skip it
+                .onErrorResumeNext(Single.just(new ArrayList<>())),(first,second)->{
+                    if(second!=null){
+                        first.addAll(second);
+                    }
+                    return first;
+                });
+
+  //call all of them
+  start.subscribeOn(Schedulers.io())
+       .observeOn(AndroidSchedulers.mainThread())
+       .subscribe(list->{
+       	  //do something
+       });   
+```
+
 
 
 ## The End. ##
