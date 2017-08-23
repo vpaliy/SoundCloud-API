@@ -26,7 +26,7 @@ public interface SoundCloudService {
     Single<List<TrackEntity>> searchTracks(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.TRACKS)
-    Single<Page<TrackEntity>> searchTracksWithPage(@QueryMap Map<String,Object> options);
+    Single<Page<TrackEntity>> searchTracksPage(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.TRACK_DETAILS)
     Single<TrackEntity> fetchTrack(@Path("id") String id);
@@ -51,6 +51,9 @@ public interface SoundCloudService {
     @GET(Endpoints.PLAYLISTS)
     Single<List<PlaylistEntity>> searchPlaylists(@QueryMap Map<String,Object> options);
 
+    @GET(Endpoints.PLAYLISTS)
+    Single<Page<PlaylistEntity>> searchPlaylistsPage(@QueryMap Map<String,Object> options);
+
     @GET(Endpoints.PLAYLIST_DETAILS)
     Single<PlaylistEntity> fetchPlaylist(@Path("id") String id);
 
@@ -64,6 +67,9 @@ public interface SoundCloudService {
 
     @GET(Endpoints.USERS)
     Single<List<UserEntity>> searchUsers(@QueryMap Map<String,Object> options);
+
+    @GET(Endpoints.USERS)
+    Single<Page<UserEntity>> searchUsersPage(@QueryMap Map<String,Object> options);
 
     @GET(Endpoints.USER_DETAILS)
     Single<UserEntity> fetchUser(@Path("id") String id);
