@@ -179,6 +179,15 @@ public class TrackEntity {
             return this;
         }
 
+        public Filter nextPage(Page<TrackEntity> page){
+            if(page!=null){
+                if(!page.isLast){
+                    options.put("offset",page.futureOffset);
+                }
+            }
+            return this;
+        }
+
         public Filter offset(int offset){
             options.put("offset",offset);
             return this;
@@ -215,6 +224,11 @@ public class TrackEntity {
         public Filter byBPM(int from, int to){
             options.put("bpm[from]",from);
             options.put("bpm[to]",to);
+            return this;
+        }
+
+        public Filter withPagination(){
+            options.put("linked_partitioning",-1);
             return this;
         }
 

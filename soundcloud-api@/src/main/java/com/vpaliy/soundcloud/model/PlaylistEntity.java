@@ -91,6 +91,15 @@ public class PlaylistEntity {
             return this;
         }
 
+        public Filter nextPage(Page<PlaylistEntity> page){
+            if(page!=null){
+                if(!page.isLast){
+                    options.put("offset",page.futureOffset);
+                }
+            }
+            return this;
+        }
+
         public Filter limit(int limit){
             options.put("limit",limit);
             return this;

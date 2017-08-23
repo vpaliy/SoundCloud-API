@@ -25,6 +25,9 @@ public interface SoundCloudService {
     @GET(Endpoints.TRACKS)
     Single<List<TrackEntity>> searchTracks(@QueryMap Map<String,Object> options);
 
+    @GET(Endpoints.TRACKS)
+    Single<Page<TrackEntity>> searchTracksWithPage(@QueryMap Map<String,Object> options);
+
     @GET(Endpoints.TRACK_DETAILS)
     Single<TrackEntity> fetchTrack(@Path("id") String id);
 
@@ -94,6 +97,7 @@ public interface SoundCloudService {
 
     @GET(Endpoints.USER_WEB_PROFILES)
     Single<List<WebProfileEntity>> fetchUserWebProfiles(@Path("id") String id);
+
 
 
     /** ME **/

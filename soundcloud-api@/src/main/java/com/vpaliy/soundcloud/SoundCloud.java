@@ -3,7 +3,11 @@ package com.vpaliy.soundcloud;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.vpaliy.soundcloud.model.Token;
+import com.vpaliy.soundcloud.utils.Adapter;
+
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.HttpUrl;
@@ -63,9 +67,12 @@ public class SoundCloud {
     }
 
     private Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new Adapter())
+                .create();
         return new Retrofit.Builder()
                 .baseUrl("https://api.soundcloud.com/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
