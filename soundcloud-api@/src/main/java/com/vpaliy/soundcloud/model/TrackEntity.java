@@ -163,7 +163,9 @@ public class TrackEntity {
 
     @SuppressWarnings({"WeakerAccess"})
     public static class Filter {
+
         private Map<String,Object> options;
+        private Page<?> page;
 
         public Filter(){
             options=new HashMap<>();
@@ -180,13 +182,10 @@ public class TrackEntity {
         }
 
         public Filter nextPage(Page<?> page){
-            if(page!=null){
-                if(!page.isLast){
-                    options.put("offset",page.futureOffset);
-                }
-            }
+            this.page=page;
             return this;
         }
+
 
         public Filter offset(int offset){
             options.put("offset",offset);
@@ -263,6 +262,14 @@ public class TrackEntity {
         }
 
         public Map<String,Object> createOptions(){
+            if(page!=null){
+                if(!page.isLast){
+                    withPagination();
+                    options.put("offset",page.futureOffset);
+                    options.put("q",page.query);
+                }
+            }
+            page=null;
             return options;
         }
 

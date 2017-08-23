@@ -40,6 +40,7 @@ public class UserEntity {
     public static class Filter {
 
         private Map<String,Object> options;
+        private Page<?> page;
 
         public Filter(){
             options=new HashMap<>();
@@ -51,11 +52,12 @@ public class UserEntity {
         }
 
         public Filter nextPage(Page<?> page){
-            if(page!=null){
-                if(!page.isLast){
-                    options.put("offset",page.futureOffset);
-                }
-            }
+            this.page=page;
+            return this;
+        }
+
+        public Filter withPagination(){
+            options.put("linked_partitioning",-1);
             return this;
         }
 
@@ -75,6 +77,14 @@ public class UserEntity {
         }
 
         public Map<String,Object> createOptions(){
+            if(page!=null){
+                if(!page.isLast){
+                    withPagination();
+                    options.put("offset",page.futureOffset);
+                    options.put("q",page.query);
+                }
+            }
+            page=null;
             return options;
         }
 
