@@ -91,7 +91,7 @@ public class PlaylistEntity {
             return this;
         }
 
-        public Filter nextPage(Page<PlaylistEntity> page){
+        public Filter nextPage(Page<?> page){
             if(page!=null){
                 if(!page.isLast){
                     options.put("offset",page.futureOffset);

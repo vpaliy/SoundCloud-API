@@ -50,7 +50,7 @@ public class UserEntity {
             return this;
         }
 
-        public Filter nextPage(Page<UserEntity> page){
+        public Filter nextPage(Page<?> page){
             if(page!=null){
                 if(!page.isLast){
                     options.put("offset",page.futureOffset);

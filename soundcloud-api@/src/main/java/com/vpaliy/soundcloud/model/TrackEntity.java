@@ -179,7 +179,7 @@ public class TrackEntity {
             return this;
         }
 
-        public Filter nextPage(Page<TrackEntity> page){
+        public Filter nextPage(Page<?> page){
             if(page!=null){
                 if(!page.isLast){
                     options.put("offset",page.futureOffset);
