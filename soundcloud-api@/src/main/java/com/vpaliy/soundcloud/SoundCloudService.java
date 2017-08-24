@@ -12,8 +12,12 @@ import com.vpaliy.soundcloud.model.UserEntity;
 import com.vpaliy.soundcloud.model.WebProfileEntity;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.Completable;
 import io.reactivex.Single;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -122,6 +126,24 @@ public interface SoundCloudService {
 
     @GET(Endpoints.SUGGESTED_USERS)
     Single<List<UserEntity>> fetchSuggestedUsers();
+
+    @PUT(Endpoints.ME_FAVORITE_TRACK)
+    Completable loveTrack(@Path("id") String id);
+
+    @DELETE(Endpoints.ME_FAVORITE_TRACK)
+    Completable unloveTrack(@Path("id") String id);
+
+    @PUT(Endpoints.ME_FOLLOW)
+    Completable followUser(@Path("id") String id);
+
+    @DELETE(Endpoints.ME_FOLLOW)
+    Completable unfollowUser(@Path("id") String id);
+
+    @GET(Endpoints.ME_FOLLOW)
+    Completable amIFollowing(@Path("id") String id);
+
+    @GET(Endpoints.ME_FAVORITE_TRACK)
+    Completable didILike(@Path("id") String id);
 
     /** APPS **/
 
