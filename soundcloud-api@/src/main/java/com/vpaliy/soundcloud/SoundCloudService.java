@@ -119,7 +119,7 @@ public interface SoundCloudService {
     Single<List<ConnectionEntity>> fetchMyConnections();
 
     @GET(Endpoints.ME_FOLLOWERS)
-    Single<List<UserEntity>> fetchMyFollowings();
+    Single<Page<UserEntity>> fetchMyFollowings();
 
     @GET(Endpoints.ME_FAVORITE_TRACKS)
     Single<List<TrackEntity>> fetchMyFavoriteTracks();
