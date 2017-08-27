@@ -41,6 +41,8 @@ public interface Endpoints {
     String ME_DEVICES          = "me/devices";
     String ME_FAVORITE_TRACK   = "me/favorites/{id}";
     String ME_FOLLOW           = "me/followings/{id}";
+    String ME_FAVORITE_TRACKS   = "me/favorites";
+    String ME_FOLLOWERS           = "me/followings";
 
     String SUGGESTED_USERS     = "users/suggested";
 

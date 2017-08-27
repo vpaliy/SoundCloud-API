@@ -118,6 +118,12 @@ public interface SoundCloudService {
     @GET(Endpoints.ME_ACTIVITIES)
     Single<List<ConnectionEntity>> fetchMyConnections();
 
+    @GET(Endpoints.ME_FOLLOWERS)
+    Single<List<UserEntity>> fetchMyFollowings();
+
+    @GET(Endpoints.ME_FAVORITE_TRACKS)
+    Single<List<TrackEntity>> fetchMyFavoriteTracks();
+
     @GET(Endpoints.ME_CONNECTION)
     Single<ConnectionEntity> fetchMyConnection(@Path("id") String connectionId);
 
