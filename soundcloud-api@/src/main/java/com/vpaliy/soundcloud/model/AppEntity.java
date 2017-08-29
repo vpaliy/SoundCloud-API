@@ -8,4 +8,6 @@ public class AppEntity {
     public String permalink_url;
     public String external_url;
     public String creator;
+
+    public AppEntity(){}
 }

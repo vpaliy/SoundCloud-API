@@ -56,6 +56,8 @@ public class TrackEntity {
     public String artwork_data;
     public boolean user_favorite;
 
+    public TrackEntity(){}
+
     public enum License {
 
         ALL_RIGHTS_RESERVED("all-rights-reserved"),

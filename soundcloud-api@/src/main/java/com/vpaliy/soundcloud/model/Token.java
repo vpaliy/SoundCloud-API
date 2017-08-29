@@ -30,6 +30,8 @@ public class Token  {
     public String scope;
     public long expiresIn;
 
+    public Token(){}
+
     public final Map<String, String> customParameters = new HashMap<String, String>();
 
     /** Invalidates the access token */

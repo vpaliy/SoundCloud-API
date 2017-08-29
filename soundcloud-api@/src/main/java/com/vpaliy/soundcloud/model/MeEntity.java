@@ -9,4 +9,6 @@ public class MeEntity extends UserEntity {
     public long private_playlists_count;
     @SerializedName("primary_email_confirmed")
     public boolean isEmailConfirmed;
+
+    public MeEntity(){}
 }

@@ -8,4 +8,6 @@ public class WebProfileEntity {
     private String url;
     private String username;
     private String created_at;
+
+    public WebProfileEntity(){}
 }

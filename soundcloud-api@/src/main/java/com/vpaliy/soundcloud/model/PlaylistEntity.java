@@ -45,6 +45,8 @@ public class PlaylistEntity {
     public MiniUserEntity user;
     public List<TrackEntity> tracks;
 
+    public PlaylistEntity(){}
+
     public static class PlaylistType {
         public static final String EP_SINGLE = "ep single";
         public static final String ALBUM = "album";

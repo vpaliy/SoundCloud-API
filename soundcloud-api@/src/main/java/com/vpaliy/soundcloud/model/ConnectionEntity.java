@@ -9,4 +9,6 @@ public class ConnectionEntity {
     public String service;
     public String type;
     public String uri;
+
+    public ConnectionEntity(){}
 }

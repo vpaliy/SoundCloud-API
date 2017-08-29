@@ -9,4 +9,6 @@ public class MiniUserEntity {
     public String permalink_url;
     public String uri;
     public String username;
+
+    public MiniUserEntity(){}
 }

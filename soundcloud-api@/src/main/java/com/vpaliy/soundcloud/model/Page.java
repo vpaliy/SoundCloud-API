@@ -17,6 +17,7 @@ public class Page<T> implements Adapter.PostProcessable{
     public int futureOffset;
     public String query;
 
+    public Page(){}
 
     @Override
     public void postProcess() {

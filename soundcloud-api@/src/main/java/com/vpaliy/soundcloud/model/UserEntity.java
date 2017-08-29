@@ -36,6 +36,8 @@ public class UserEntity {
     public String public_favorites_count;
     public String avatar_data;
 
+    public UserEntity(){}
+
     @SuppressWarnings({"unused","WeakerAccess"})
     public static class Filter {
 
