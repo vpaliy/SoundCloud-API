@@ -28,7 +28,7 @@ Add the dependency
 
 ``` gradle
 dependencies {
-	compile 'com.github.vpaliyX:SoundCloud-API:v1.2.2'
+	compile 'com.github.vpaliyX:SoundCloud-API:-SNAPSHOT'
 }
 
 ```
