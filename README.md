@@ -40,15 +40,18 @@ You need to get your `client_id` and `client_secret` by registering your app [he
 Basically, most of the calls will look like this one:
 
 ```java
-SoundCloudService service=SoundCloud.create(Config.CLIENT_ID)
-	.appendToken(token) //this is not mandatory, most of the calls do not require an access token
-	.createService(this); //just Context class
+final SoundCloud api = new SoundCloud.Builder(context, Config.CLIENT_ID)
+	.setToken(token)
+	.setInterceptor(interceptor)
+	.build();
+final SoundCloudService service = api.getSoundCloudService();
 service.fetchTrack("123456678") //some dummy track id
 	.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(track->{
         	//do something with the track   
  	});
+	
 ```
 
 It's pretty simple. If you want to pass query paramaters, use the following structure:
