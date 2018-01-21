@@ -2,6 +2,7 @@ package com.vpaliy.soundcloud;
 
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -70,32 +71,34 @@ public class SoundCloud {
             return this;
         }
 
-        private Interceptor buildOkkHttpInterceptor() {
-            return (chain -> {
-                Request originalRequest = chain.request();
-                HttpUrl originalHttpUrl = originalRequest.url();
-                HttpUrl.Builder builder = originalHttpUrl.newBuilder()
-                        .addEncodedQueryParameter(API_QUERY, apiKey);
-                if (token != null) {
-                    builder.addEncodedQueryParameter(OAUTH_TOKEN, token.access);
-                }
-                HttpUrl newHttpUrl = builder.build();
-                Request newRequest = originalRequest.newBuilder()
-                        .url(newHttpUrl).build();
-                return chain.proceed(newRequest);
-            });
-        }
-
-        private OkHttpClient provideOkHttpClient(Context context, Interceptor interceptor) {
+        private OkHttpClient provideOkHttpClient(Context context, @Nullable Interceptor interceptor) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                    .addInterceptor(interceptor)
+                    .addInterceptor(provideDefaultInterceptor())
                     .cache(new Cache(context.getCacheDir(), CACHE_SIZE));
+            if (interceptor != null) {
+                builder.addInterceptor(interceptor);
+            }
             return builder.build();
         }
 
+        private Interceptor provideDefaultInterceptor() {
+            return chain -> {
+                final Request request = chain.request();
+                final HttpUrl url = request.url();
+                final HttpUrl.Builder newUrlBuilder = url.newBuilder()
+                        .addEncodedQueryParameter(API_QUERY, apiKey);
+                if (token != null) {
+                    newUrlBuilder.addEncodedQueryParameter(OAUTH_TOKEN, token.access);
+                }
+                final Request newRequest = request.newBuilder()
+                        .url(newUrlBuilder.build())
+                        .build();
+                return chain.proceed(newRequest);
+            };
+        }
 
         private Retrofit provideRetrofit(OkHttpClient okHttpClient) {
             Gson gson = new GsonBuilder()
@@ -110,20 +113,14 @@ public class SoundCloud {
         }
 
         private HttpUrl buildBaseUrl() {
-            final HttpUrl.Builder builder = new HttpUrl.Builder()
+            return new HttpUrl.Builder()
                     .scheme("https")
                     .host("api.soundcloud.com")
-                    .addEncodedQueryParameter(API_QUERY, apiKey);
-            if (token != null) {
-                builder.addEncodedQueryParameter(OAUTH_TOKEN, token.access);
-            }
-            return builder.build();
+                    .build();
         }
 
         public SoundCloud build() {
             if (okHttpClient == null) {
-                if (interceptor == null)
-                    interceptor = buildOkkHttpInterceptor();
                 okHttpClient = provideOkHttpClient(context, interceptor);
             }
             final SoundCloudService service = provideRetrofit(okHttpClient).create(SoundCloudService.class);

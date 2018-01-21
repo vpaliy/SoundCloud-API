@@ -10,6 +10,7 @@ import com.vpaliy.soundcloud.model.SecretToken;
 import com.vpaliy.soundcloud.model.TrackEntity;
 import com.vpaliy.soundcloud.model.UserEntity;
 import com.vpaliy.soundcloud.model.WebProfileEntity;
+
 import java.util.List;
 import java.util.Map;
 
@@ -24,13 +25,15 @@ import retrofit2.http.QueryMap;
 @SuppressWarnings("unused")
 public interface SoundCloudService {
 
-    /** Tracks **/
+    /**
+     * Tracks
+     **/
 
     @GET(Endpoints.TRACKS)
-    Single<List<TrackEntity>> searchTracks(@QueryMap Map<String,Object> options);
+    Single<List<TrackEntity>> searchTracks(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.TRACKS)
-    Single<Page<TrackEntity>> searchTracksPage(@QueryMap Map<String,Object> options);
+    Single<Page<TrackEntity>> searchTracksPage(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.TRACK_DETAILS)
     Single<TrackEntity> fetchTrack(@Path("id") String id);
@@ -50,13 +53,15 @@ public interface SoundCloudService {
     @GET(Endpoints.TRACK_SECRET_TOKEN)
     Single<SecretToken> fetchTrackSecretToken(@Path("id") String id);
 
-    /** Playlists **/
+    /**
+     * Playlists
+     **/
 
     @GET(Endpoints.PLAYLISTS)
-    Single<List<PlaylistEntity>> searchPlaylists(@QueryMap Map<String,Object> options);
+    Single<List<PlaylistEntity>> searchPlaylists(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.PLAYLISTS)
-    Single<Page<PlaylistEntity>> searchPlaylistsPage(@QueryMap Map<String,Object> options);
+    Single<Page<PlaylistEntity>> searchPlaylistsPage(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.PLAYLIST_DETAILS)
     Single<PlaylistEntity> fetchPlaylist(@Path("id") String id);
@@ -67,13 +72,15 @@ public interface SoundCloudService {
     @GET(Endpoints.PLAYLIST_SECRET_TOKEN)
     Single<SecretToken> fetchPlaylistSecretToken(@Path("id") String id);
 
-    /** Users**/
+    /**
+     * Users
+     **/
 
     @GET(Endpoints.USERS)
-    Single<List<UserEntity>> searchUsers(@QueryMap Map<String,Object> options);
+    Single<List<UserEntity>> searchUsers(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.USERS)
-    Single<Page<UserEntity>> searchUsersPage(@QueryMap Map<String,Object> options);
+    Single<Page<UserEntity>> searchUsersPage(@QueryMap Map<String, Object> options);
 
     @GET(Endpoints.USER_DETAILS)
     Single<UserEntity> fetchUser(@Path("id") String id);
@@ -109,8 +116,9 @@ public interface SoundCloudService {
     Single<List<WebProfileEntity>> fetchUserWebProfiles(@Path("id") String id);
 
 
-
-    /** ME **/
+    /**
+     * ME
+     **/
 
     @GET(Endpoints.ME)
     Single<UserEntity> me();
@@ -151,7 +159,9 @@ public interface SoundCloudService {
     @GET(Endpoints.ME_FAVORITE_TRACK)
     Completable didILike(@Path("id") String id);
 
-    /** APPS **/
+    /**
+     * APPS
+     **/
 
     @GET(Endpoints.APPS)
     Single<List<AppEntity>> fetchApps();
