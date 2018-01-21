@@ -21,28 +21,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SoundCloud {
 
-    private Token token;
-    private final String clientId;
     private final SoundCloudService soundCloudService;
 
-    private SoundCloud(String clientId, SoundCloudService soundCloudService) {
-        this.clientId = clientId;
+    private SoundCloud(SoundCloudService soundCloudService) {
         this.soundCloudService = soundCloudService;
     }
 
-    public SoundCloud appendToken(Token token) {
-        this.token = token;
-        return this;
+    public SoundCloudService getSoundCloudService() {
+        return soundCloudService;
     }
 
     public static class Builder {
-        private final String apiKey;
-        private final Context context;
-
-        private Token token;
-        private Interceptor interceptor;
-        private OkHttpClient okHttpClient;
-
         private static final String API_QUERY = "client_id";
         private static final String OAUTH_TOKEN = "oauth_token";
 
@@ -50,6 +39,13 @@ public class SoundCloud {
         private static final int CONNECT_TIMEOUT = 60;
         private static final int WRITE_TIMEOUT = 60;
         private static final int READ_TIMEOUT = 60;
+
+        private final String apiKey;
+        private final Context context;
+
+        private Token token;
+        private Interceptor interceptor;
+        private OkHttpClient okHttpClient;
 
         public Builder(Context context, String apiKey) {
             if (apiKey == null || context == null) {
@@ -131,7 +127,7 @@ public class SoundCloud {
                 okHttpClient = provideOkHttpClient(context, interceptor);
             }
             final SoundCloudService service = provideRetrofit(okHttpClient).create(SoundCloudService.class);
-            return new SoundCloud(apiKey, service);
+            return new SoundCloud(service);
         }
     }
 }
