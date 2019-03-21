@@ -24,7 +24,7 @@ public class TrackEntity {
     public String description;
     public String duration;
     public String genre;
-    public String tags_list;
+    public String tag_list;
     public String label_id;
     public String label_name;
     public String release;
