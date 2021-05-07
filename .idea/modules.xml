@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SoundCloud-API.iml" filepath="$PROJECT_DIR$/SoundCloud-API.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/soundcloud-api@/soundcloud-api@.iml" filepath="$PROJECT_DIR$/soundcloud-api@/soundcloud-api@.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SoundCloud-API.iml" filepath="$PROJECT_DIR$/.idea/modules/SoundCloud-API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SoundCloud-API.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SoundCloud-API.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soundcloud-api@/SoundCloud-API.soundcloud-api@.iml" filepath="$PROJECT_DIR$/.idea/modules/soundcloud-api@/SoundCloud-API.soundcloud-api@.iml" />
     </modules>
   </component>
 </project>

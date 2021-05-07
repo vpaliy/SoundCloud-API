@@ -2,7 +2,6 @@ package com.vpaliy.soundcloud;
 
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,7 +70,7 @@ public class SoundCloud {
             return this;
         }
 
-        private OkHttpClient provideOkHttpClient(Context context, @Nullable Interceptor interceptor) {
+        private OkHttpClient provideOkHttpClient(Context context, Interceptor interceptor) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
                     .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                     .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)

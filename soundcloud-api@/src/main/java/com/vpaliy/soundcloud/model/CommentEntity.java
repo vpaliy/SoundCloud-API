@@ -10,5 +10,6 @@ public class CommentEntity {
     public MiniUserEntity user;
     public String track_id;
 
-    public CommentEntity(){}
+    public CommentEntity() {
+    }
 }

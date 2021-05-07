@@ -3,10 +3,9 @@ ext {
     configuration =
             [
                     package                  : "com.vpaliy.soundcloud_api",
-                    buildToolsVersion        : "25.0.3",
-                    compileSdkVersion        : 25,
-                    minSdkVersion            : 16,
-                    targetSdkVersion         : 25,
+                    compileSdkVersion        : 29,
+                    minSdkVersion            : 21,
+                    targetSdkVersion         : 29,
                     versionCode              : 1,
                     versionName              : "1.0",
                     testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
@@ -14,17 +13,14 @@ ext {
             ]
 
     /* Library versions */
-    butterKnifeVersion = "8.5.1"
-    supportVersion = "25.1.0"
-    rxJavaVersion = '2.0.2'
-    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '3.0.12'
+    rxAndroidVersion = '3.0.0'
     javaxAnnotationVersion = '1.0'
-    gsonVersion = '2.3'
-    okHttpVersion = '2.5.0'
-    retrofitVersion="2.2.0"
-    retrofitConverterVersion="2.1.0"
-    retrofitAdapterVersion="2.2.0"
-    constraintLayoutVersion="1.0.2"
+    gsonVersion = '2.8.6'
+    okHttpVersion = '4.9.0'
+    retrofitVersion = "2.9.0"
+    retrofitConverterVersion = "2.1.0"
+    retrofitAdapterVersion = "2.2.0"
 
 
     /* Testing versions */
@@ -41,25 +37,20 @@ ext {
 
     /** Main dependencies **/
     dependencies = [
-            supportAppCompat   : "com.android.support:appcompat-v7:${supportVersion}",
-            supportDesign      : "com.android.support:design:${supportVersion}",
-            butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-            RxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            RxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            gson               : "com.google.code.gson:gson:${gsonVersion}",
-            okHttp             : "com.squareup.okhttp:okhttp:${okHttpVersion}",
-            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitConverter  : "com.squareup.retrofit2:converter-gson:${retrofitConverterVersion}",
-            retrofitAdapter    : 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
-            leakCanary         :"com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
-            constraintLayout   : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            RxJava           : "io.reactivex.rxjava3:rxjava:${rxJavaVersion}",
+            RxAndroid        : "io.reactivex.rxjava3:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation  : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersion}",
+            okHttp           : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            retrofit         : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter: "com.squareup.retrofit2:converter-gson:${retrofitConverterVersion}",
+            retrofitAdapter  : 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
+            leakCanary       : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
     ]
 
     testDependencies = [
-            jUnit :             "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            jUnit            : "junit:junit:${jUnitVersion}",
+            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+            testingSupportLib: "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
     ]
 }

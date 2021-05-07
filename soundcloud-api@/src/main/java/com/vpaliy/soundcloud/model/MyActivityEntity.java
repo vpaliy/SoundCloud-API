@@ -8,13 +8,15 @@ public class MyActivityEntity {
 
     public Origin origin;
 
-    public MyActivityEntity(){}
+    public MyActivityEntity() {
+    }
 
-    public class Origin{
+    public class Origin {
         public TrackEntity track;
         public CommentEntity comment;
         public MiniUserEntity miniUser;
 
-        public Origin(){}
+        public Origin() {
+        }
     }
 }

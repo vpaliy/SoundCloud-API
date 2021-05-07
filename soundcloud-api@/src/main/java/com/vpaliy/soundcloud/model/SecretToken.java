@@ -6,5 +6,6 @@ public class SecretToken {
     public String uri;
     public String resource_uri;
 
-    public SecretToken(){}
+    public SecretToken() {
+    }
 }

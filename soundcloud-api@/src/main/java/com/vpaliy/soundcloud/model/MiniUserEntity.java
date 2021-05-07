@@ -10,5 +10,6 @@ public class MiniUserEntity {
     public String uri;
     public String username;
 
-    public MiniUserEntity(){}
+    public MiniUserEntity() {
+    }
 }

@@ -10,5 +10,6 @@ public class ConnectionEntity {
     public String type;
     public String uri;
 
-    public ConnectionEntity(){}
+    public ConnectionEntity() {
+    }
 }

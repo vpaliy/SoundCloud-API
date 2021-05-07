@@ -3,19 +3,19 @@ package com.vpaliy.soundcloud.auth;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@SuppressWarnings({"unused","WeakerAccess"})
-class Connect implements Parcelable{
+@SuppressWarnings({"unused", "WeakerAccess"})
+class Connect implements Parcelable {
     final String url;
     final String redirectUri;
 
-    public Connect(Parcel parcel){
-        this.url=parcel.readString();
-        this.redirectUri=parcel.readString();
+    public Connect(Parcel parcel) {
+        this.url = parcel.readString();
+        this.redirectUri = parcel.readString();
     }
 
-    public Connect(String url, String redirectUri){
-        this.url=url;
-        this.redirectUri=redirectUri;
+    public Connect(String url, String redirectUri) {
+        this.url = url;
+        this.redirectUri = redirectUri;
     }
 
     @Override
@@ -29,7 +29,7 @@ class Connect implements Parcelable{
         dest.writeString(redirectUri);
     }
 
-    public static Creator<Connect> CREATOR=new Creator<Connect>() {
+    public static Creator<Connect> CREATOR = new Creator<Connect>() {
         @Override
         public Connect createFromParcel(Parcel source) {
             return new Connect(source);

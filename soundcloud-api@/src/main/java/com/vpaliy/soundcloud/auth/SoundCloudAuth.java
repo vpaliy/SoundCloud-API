@@ -3,7 +3,9 @@ package com.vpaliy.soundcloud.auth;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
+
 import com.vpaliy.soundcloud.model.Token;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,25 +25,25 @@ public class SoundCloudAuth {
     private String clientSecret;
     private String redirectUri;
 
-    private String GRANT_TYPE       = "grant_type";
-    private String CLIENT_ID        = "client_id";
-    private String CLIENT_SECRET    = "client_secret";
-    private String USERNAME         = "username";
-    private String REDIRECT_URI     = "redirect_uri";
-    private String CODE             = "code";
-    private String RESPONSE_TYPE    = "response_type";
-    private String SCOPE            = "scope";
-    private String DISPLAY          = "display";
-    private String STATE            = "state";
-    private String PASSWORD         = "password";
+    private String GRANT_TYPE = "grant_type";
+    private String CLIENT_ID = "client_id";
+    private String CLIENT_SECRET = "client_secret";
+    private String USERNAME = "username";
+    private String REDIRECT_URI = "redirect_uri";
+    private String CODE = "code";
+    private String RESPONSE_TYPE = "response_type";
+    private String SCOPE = "scope";
+    private String DISPLAY = "display";
+    private String STATE = "state";
+    private String PASSWORD = "password";
 
 
-    private SoundCloudAuth(String clientId, String clientSecret){
-        if(clientId==null||clientSecret==null){
+    private SoundCloudAuth(String clientId, String clientSecret) {
+        if (clientId == null || clientSecret == null) {
             throw new IllegalArgumentException("client_id or client_secret is null");
         }
-        this.clientId=clientId;
-        this.clientSecret=clientSecret;
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -54,7 +56,7 @@ public class SoundCloudAuth {
     }
 
 
-    private Interceptor buildInterceptor(){
+    private Interceptor buildInterceptor() {
         return (chain -> {
             Request originalRequest = chain.request();
             HttpUrl originalHttpUrl = originalRequest.url();
@@ -63,11 +65,12 @@ public class SoundCloudAuth {
                     .build();
             Request newRequest = originalRequest.newBuilder()
                     .url(newHttpUrl).build();
-            return chain.proceed(newRequest);});
+            return chain.proceed(newRequest);
+        });
     }
 
-    private Retrofit buildRetrofit(){
-        OkHttpClient okHttpClient=new OkHttpClient.Builder()
+    private Retrofit buildRetrofit() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(buildInterceptor())
                 .build();
         return new Retrofit.Builder()
@@ -78,81 +81,82 @@ public class SoundCloudAuth {
                 .build();
     }
 
-    public SoundCloudAuth addRedirectUri(String redirectUri){
-        this.redirectUri=redirectUri;
+    public SoundCloudAuth addRedirectUri(String redirectUri) {
+        this.redirectUri = redirectUri;
         return this;
     }
 
-    private AuthService createService(){
+    private AuthService createService() {
         return buildRetrofit().create(AuthService.class);
     }
 
-    public Single<Token> tokenWithAuthCode(String code){
-        if(TextUtils.isEmpty(code)){
+    public Single<Token> tokenWithAuthCode(String code) {
+        if (TextUtils.isEmpty(code)) {
             throw new IllegalArgumentException("auth is empty");
         }
-        AuthService service=createService();
-        Map<String,Object> fieldMap=new HashMap<>();
-        fieldMap.put(CLIENT_ID,clientId);
-        fieldMap.put(CLIENT_SECRET,clientSecret);
-        fieldMap.put(GRANT_TYPE,GrantType.AUTH_CODE);
-        fieldMap.put(CODE,code);
-        if(redirectUri!=null){
-            fieldMap.put(REDIRECT_URI,redirectUri);
-        }
-        return service.requestToken(fieldMap);
-    }
-    public Single<Token> tokenWithCredentials(String username, String password){
-        if(TextUtils.isEmpty(username)||TextUtils.isEmpty(password)){
-            throw new IllegalArgumentException("username or password is null");
-        }
-        AuthService service=createService();
-        Map<String,Object> fieldMap=new HashMap<>();
-        fieldMap.put(CLIENT_ID,clientId);
-        fieldMap.put(CLIENT_SECRET,clientSecret);
-        fieldMap.put(GRANT_TYPE,GrantType.PASSWORD);
-        fieldMap.put(USERNAME,username);
-        fieldMap.put(PASSWORD,password);
-        if(redirectUri!=null){
-            fieldMap.put(REDIRECT_URI,redirectUri);
-        }
-        return service.requestToken(fieldMap);
-    }
-
-    public Single<Token> refreshToken(Token token){
-        if(token==null||TextUtils.isEmpty(token.refresh)){
-            throw new IllegalArgumentException("Wrong token");
-        }
-        AuthService service=createService();
-        Map<String,Object> fieldMap=new HashMap<>();
+        AuthService service = createService();
+        Map<String, Object> fieldMap = new HashMap<>();
         fieldMap.put(CLIENT_ID, clientId);
         fieldMap.put(CLIENT_SECRET, clientSecret);
-        fieldMap.put(GrantType.REFRESH_TOKEN, token.refresh);
-        fieldMap.put(GRANT_TYPE, GrantType.REFRESH_TOKEN);
-        if(redirectUri!=null) {
+        fieldMap.put(GRANT_TYPE, GrantType.AUTH_CODE);
+        fieldMap.put(CODE, code);
+        if (redirectUri != null) {
             fieldMap.put(REDIRECT_URI, redirectUri);
         }
         return service.requestToken(fieldMap);
     }
 
-    public void loginWithActivity(Activity activity, String redirectUri, int requestCode){
-        if(TextUtils.isEmpty(redirectUri)){
+    public Single<Token> tokenWithCredentials(String username, String password) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            throw new IllegalArgumentException("username or password is null");
+        }
+        AuthService service = createService();
+        Map<String, Object> fieldMap = new HashMap<>();
+        fieldMap.put(CLIENT_ID, clientId);
+        fieldMap.put(CLIENT_SECRET, clientSecret);
+        fieldMap.put(GRANT_TYPE, GrantType.PASSWORD);
+        fieldMap.put(USERNAME, username);
+        fieldMap.put(PASSWORD, password);
+        if (redirectUri != null) {
+            fieldMap.put(REDIRECT_URI, redirectUri);
+        }
+        return service.requestToken(fieldMap);
+    }
+
+    public Single<Token> refreshToken(Token token) {
+        if (token == null || TextUtils.isEmpty(token.refresh)) {
+            throw new IllegalArgumentException("Wrong token");
+        }
+        AuthService service = createService();
+        Map<String, Object> fieldMap = new HashMap<>();
+        fieldMap.put(CLIENT_ID, clientId);
+        fieldMap.put(CLIENT_SECRET, clientSecret);
+        fieldMap.put(GrantType.REFRESH_TOKEN, token.refresh);
+        fieldMap.put(GRANT_TYPE, GrantType.REFRESH_TOKEN);
+        if (redirectUri != null) {
+            fieldMap.put(REDIRECT_URI, redirectUri);
+        }
+        return service.requestToken(fieldMap);
+    }
+
+    public void loginWithActivity(Activity activity, String redirectUri, int requestCode) {
+        if (TextUtils.isEmpty(redirectUri)) {
             throw new IllegalArgumentException("redirectUri is empty");
         }
-        String url="https://www.soundcloud.com/connect?" +
+        String url = "https://www.soundcloud.com/connect?" +
                 "client_id=" + clientId +
                 "&redirect_uri=" + redirectUri +
                 "&response_type=" + "code" +
                 "&scope=" + "non-expiring" +
                 "&display=" + "popup" +
                 "&state=" + "asdf";
-        Connect connect=new Connect(url,redirectUri);
-        Intent intent=new Intent(activity,LoginActivity.class);
-        intent.putExtra(LoginActivity.EXTRA_CONNECT_DATA,connect);
-        activity.startActivityForResult(intent,requestCode);
+        Connect connect = new Connect(url, redirectUri);
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.putExtra(LoginActivity.EXTRA_CONNECT_DATA, connect);
+        activity.startActivityForResult(intent, requestCode);
     }
 
-    public static SoundCloudAuth create(String clientId,String clientSecret){
-        return new SoundCloudAuth(clientId,clientSecret);
+    public static SoundCloudAuth create(String clientId, String clientSecret) {
+        return new SoundCloudAuth(clientId, clientSecret);
     }
 }

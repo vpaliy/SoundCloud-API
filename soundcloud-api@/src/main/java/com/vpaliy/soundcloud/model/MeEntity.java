@@ -10,5 +10,6 @@ public class MeEntity extends UserEntity {
     @SerializedName("primary_email_confirmed")
     public boolean isEmailConfirmed;
 
-    public MeEntity(){}
+    public MeEntity() {
+    }
 }

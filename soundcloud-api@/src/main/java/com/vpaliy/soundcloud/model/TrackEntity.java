@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
@@ -56,7 +57,8 @@ public class TrackEntity {
     public String artwork_data;
     public boolean user_favorite;
 
-    public TrackEntity(){}
+    public TrackEntity() {
+    }
 
     public enum License {
 
@@ -166,116 +168,116 @@ public class TrackEntity {
     @SuppressWarnings({"WeakerAccess"})
     public static class Filter {
 
-        private Map<String,Object> options;
+        private Map<String, Object> options;
         private Page<?> page;
 
-        public Filter(){
-            options=new HashMap<>();
+        public Filter() {
+            options = new HashMap<>();
         }
 
-        public Filter byName(String name){
-            options.put("q",name);
+        public Filter byName(String name) {
+            options.put("q", name);
             return this;
         }
 
-        public Filter limit(int limit){
-            options.put("limit",limit);
+        public Filter limit(int limit) {
+            options.put("limit", limit);
             return this;
         }
 
-        public Filter nextPage(Page<?> page){
-            this.page=page;
+        public Filter nextPage(Page<?> page) {
+            this.page = page;
             return this;
         }
 
 
-        public Filter offset(int offset){
-            options.put("offset",offset);
+        public Filter offset(int offset) {
+            options.put("offset", offset);
             return this;
         }
 
-        public Filter byGenres(String... genres){
-            if(genres!=null) {
+        public Filter byGenres(String... genres) {
+            if (genres != null) {
                 options.put("genres", convert(genres));
             }
             return this;
         }
 
-        public Filter byTags(String...tags){
-            if(tags!=null) {
+        public Filter byTags(String... tags) {
+            if (tags != null) {
                 options.put("tags", convert(tags));
             }
             return this;
         }
 
-        public Filter byLicense(License license){
-            if(license!=null){
-                options.put("license",license.license);
+        public Filter byLicense(License license) {
+            if (license != null) {
+                options.put("license", license.license);
             }
             return this;
         }
 
-        public Filter byTypes(Type...types){
-            if(types!=null){
-                options.put("types",convert(types));
+        public Filter byTypes(Type... types) {
+            if (types != null) {
+                options.put("types", convert(types));
             }
             return this;
         }
 
-        public Filter byBPM(int from, int to){
-            options.put("bpm[from]",from);
-            options.put("bpm[to]",to);
+        public Filter byBPM(int from, int to) {
+            options.put("bpm[from]", from);
+            options.put("bpm[to]", to);
             return this;
         }
 
-        public Filter withPagination(){
-            options.put("linked_partitioning",-1);
+        public Filter withPagination() {
+            options.put("linked_partitioning", -1);
             return this;
         }
 
-        public Filter byVisibility(Visibility visibility){
-            if(visibility!=null){
-                options.put("filter",visibility.filter);
+        public Filter byVisibility(Visibility visibility) {
+            if (visibility != null) {
+                options.put("filter", visibility.filter);
             }
             return this;
         }
 
         @SuppressWarnings("all")
-        private <T> String convert(T...strings){
+        private <T> String convert(T... strings) {
             return Arrays.toString(strings)
                     .replaceAll("[\\[.\\].\\s+]", "");
         }
 
-        public Filter byTime(Date from, Date to){
-            options.put("created_at[from]",from);
-            options.put("created_at[to]",to);
+        public Filter byTime(Date from, Date to) {
+            options.put("created_at[from]", from);
+            options.put("created_at[to]", to);
             return this;
         }
 
-        public Filter byDuration(int fromMillis, int toMillis){
-            options.put("duration[from]",fromMillis);
-            options.put("duration[to]",toMillis);
+        public Filter byDuration(int fromMillis, int toMillis) {
+            options.put("duration[from]", fromMillis);
+            options.put("duration[to]", toMillis);
             return this;
         }
 
-        public Filter byIds(String...ids){
-            options.put("ids",convert(ids));
+        public Filter byIds(String... ids) {
+            options.put("ids", convert(ids));
             return this;
         }
 
-        public Map<String,Object> createOptions(){
-            if(page!=null){
-                if(!page.isLast){
+        public Map<String, Object> createOptions() {
+            if (page != null) {
+                if (!page.isLast) {
                     withPagination();
-                    options.put("offset",page.futureOffset);
-                    options.put("q",page.query);
+                    options.put("offset", page.futureOffset);
+                    options.put("q", page.query);
                 }
             }
-            page=null;
+            page = null;
             return options;
         }
 
-        public static Filter start(){
+        public static Filter start() {
             return new Filter();
         }
     }

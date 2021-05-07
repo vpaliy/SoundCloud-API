@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda'
 
-def config=rootProject.ext.configuration;
-def libs=rootProject.ext.dependencies;
-def testLibs=rootProject.ext.testDependencies;
+def config = rootProject.ext.configuration;
+def libs = rootProject.ext.dependencies;
+def testLibs = rootProject.ext.testDependencies;
 
 android {
     compileSdkVersion config.compileSdkVersion
-    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
         minSdkVersion config.minSdkVersion
@@ -23,14 +21,15 @@ android {
 }
 
 dependencies {
-    compile libs.RxJava
-    compile libs.retrofit
-    compile libs.retrofitAdapter
-    compile libs.retrofitConverter
-    compile libs.okHttp
-    compile libs.gson
-    compile libs.RxAndroid
-    compile libs.javaxAnnotation
-    compile libs.supportAppCompat
-    testCompile testLibs.jUnit
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    implementation libs.RxJava
+    implementation libs.retrofit
+    implementation libs.retrofitAdapter
+    implementation libs.retrofitConverter
+    implementation libs.okHttp
+    implementation libs.gson
+    implementation libs.RxAndroid
+    implementation libs.javaxAnnotation
+    testImplementation testLibs.jUnit
 }

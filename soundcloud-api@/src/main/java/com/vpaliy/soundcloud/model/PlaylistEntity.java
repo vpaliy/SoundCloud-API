@@ -45,7 +45,8 @@ public class PlaylistEntity {
     public MiniUserEntity user;
     public List<TrackEntity> tracks;
 
-    public PlaylistEntity(){}
+    public PlaylistEntity() {
+    }
 
     public static class PlaylistType {
         public static final String EP_SINGLE = "ep single";
@@ -65,68 +66,69 @@ public class PlaylistEntity {
         public static final String NONE = "none";
     }
 
-    public enum  Representation{
+    public enum Representation {
         ID("id"),
         COMPACT("compact");
         public String name;
-        Representation(String name){
-            this.name=name;
+
+        Representation(String name) {
+            this.name = name;
         }
     }
 
-    @SuppressWarnings({"unused","WeakerAccess"})
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public static class Filter {
 
-        private Map<String,Object> options;
+        private Map<String, Object> options;
         private Page<?> page;
 
-        public Filter(){
-            options=new HashMap<>();
+        public Filter() {
+            options = new HashMap<>();
         }
 
-        public Filter byRepresentation(Representation representation){
-            options.put("representation",representation.name);
+        public Filter byRepresentation(Representation representation) {
+            options.put("representation", representation.name);
             return this;
         }
 
-        public Filter byName(String name){
-            options.put("q",name);
+        public Filter byName(String name) {
+            options.put("q", name);
             return this;
         }
 
-        public Filter nextPage(Page<?> page){
-            this.page=page;
+        public Filter nextPage(Page<?> page) {
+            this.page = page;
             return this;
         }
 
-        public Filter limit(int limit){
-            options.put("limit",limit);
+        public Filter limit(int limit) {
+            options.put("limit", limit);
             return this;
         }
 
-        public Filter withPagination(){
-            options.put("linked_partitioning",-1);
+        public Filter withPagination() {
+            options.put("linked_partitioning", -1);
             return this;
         }
 
-        public Filter offset(int offset){
-            options.put("offset",offset);
+        public Filter offset(int offset) {
+            options.put("offset", offset);
             return this;
         }
 
-        public static Filter start(){
+        public static Filter start() {
             return new Filter();
         }
 
-        public Map<String,Object> createOptions(){
-            if(page!=null){
-                if(!page.isLast){
+        public Map<String, Object> createOptions() {
+            if (page != null) {
+                if (!page.isLast) {
                     withPagination();
-                    options.put("offset",page.futureOffset);
-                    options.put("q",page.query);
+                    options.put("offset", page.futureOffset);
+                    options.put("q", page.query);
                 }
             }
-            page=null;
+            page = null;
             return options;
         }
     }

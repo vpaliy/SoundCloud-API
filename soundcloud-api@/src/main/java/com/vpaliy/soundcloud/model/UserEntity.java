@@ -36,61 +36,62 @@ public class UserEntity {
     public String public_favorites_count;
     public String avatar_data;
 
-    public UserEntity(){}
+    public UserEntity() {
+    }
 
-    @SuppressWarnings({"unused","WeakerAccess"})
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public static class Filter {
 
-        private Map<String,Object> options;
+        private Map<String, Object> options;
         private Page<?> page;
 
-        public Filter(){
-            options=new HashMap<>();
+        public Filter() {
+            options = new HashMap<>();
         }
 
-        public Filter byName(String name){
-            options.put("q",name);
+        public Filter byName(String name) {
+            options.put("q", name);
             return this;
         }
 
-        public Filter nextPage(Page<?> page){
-            this.page=page;
+        public Filter nextPage(Page<?> page) {
+            this.page = page;
             return this;
         }
 
-        public Filter withPagination(){
-            options.put("linked_partitioning",-1);
+        public Filter withPagination() {
+            options.put("linked_partitioning", -1);
             return this;
         }
 
-        public Filter limit(int limit){
-            options.put("limit",limit);
+        public Filter limit(int limit) {
+            options.put("limit", limit);
             return this;
         }
 
-        public Filter offset(int offset){
-            options.put("offset",offset);
+        public Filter offset(int offset) {
+            options.put("offset", offset);
             return this;
         }
 
-        public Filter invalidateAll(){
+        public Filter invalidateAll() {
             options.clear();
             return this;
         }
 
-        public Map<String,Object> createOptions(){
-            if(page!=null){
-                if(!page.isLast){
+        public Map<String, Object> createOptions() {
+            if (page != null) {
+                if (!page.isLast) {
                     withPagination();
-                    options.put("offset",page.futureOffset);
-                    options.put("q",page.query);
+                    options.put("offset", page.futureOffset);
+                    options.put("q", page.query);
                 }
             }
-            page=null;
+            page = null;
             return options;
         }
 
-        public static Filter start(){
+        public static Filter start() {
             return new Filter();
         }
     }

@@ -9,5 +9,6 @@ public class WebProfileEntity {
     private String username;
     private String created_at;
 
-    public WebProfileEntity(){}
+    public WebProfileEntity() {
+    }
 }

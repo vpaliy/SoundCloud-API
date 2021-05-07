@@ -6,6 +6,7 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 
 public class Adapter implements TypeAdapterFactory {
@@ -25,7 +26,7 @@ public class Adapter implements TypeAdapterFactory {
             public T read(JsonReader in) throws IOException {
                 T obj = delegate.read(in);
                 if (obj instanceof PostProcessable) {
-                    ((PostProcessable)obj).postProcess();
+                    ((PostProcessable) obj).postProcess();
                 }
                 return obj;
             }

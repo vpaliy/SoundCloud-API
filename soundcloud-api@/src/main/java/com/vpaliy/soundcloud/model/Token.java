@@ -11,18 +11,18 @@ import java.util.Map;
  * Represents an OAuth2 access/refresh token pair.
  */
 @SuppressWarnings("WeakerAccess")
-public class Token  {
+public class Token {
 
-    public static final String SCOPE_DEFAULT      = "*";
+    public static final String SCOPE_DEFAULT = "*";
 
-    public static final String SCOPE_SIGNUP       = "signup";
-    public static final String SCOPE_PLAYCOUNT    = "playcount";
+    public static final String SCOPE_SIGNUP = "signup";
+    public static final String SCOPE_PLAYCOUNT = "playcount";
     public static final String SCOPE_NON_EXPIRING = "non-expiring";
 
-    private static final String ACCESS_TOKEN  = "access_token";
+    private static final String ACCESS_TOKEN = "access_token";
     private static final String REFRESH_TOKEN = "refresh_token";
-    private static final String SCOPE         = "scope";
-    private static final String EXPIRES_IN    = "expires_in";
+    private static final String SCOPE = "scope";
+    private static final String EXPIRES_IN = "expires_in";
 
     @SerializedName("access_token")
     public String access;
@@ -30,11 +30,14 @@ public class Token  {
     public String scope;
     public long expiresIn;
 
-    public Token(){}
+    public Token() {
+    }
 
     public final Map<String, String> customParameters = new HashMap<String, String>();
 
-    /** Invalidates the access token */
+    /**
+     * Invalidates the access token
+     */
     public void invalidate() {
         this.access = null;
     }
@@ -50,7 +53,9 @@ public class Token  {
         return scoped(SCOPE_DEFAULT);
     }
 
-    /** @return has token the signup scope ("signup") */
+    /**
+     * @return has token the signup scope ("signup")
+     */
     public boolean signupScoped() {
         return scoped(SCOPE_SIGNUP);
     }
@@ -85,7 +90,8 @@ public class Token  {
         if (o instanceof Token) {
             Token token = (Token) o;
             if (access != null ? !access.equals(token.access) : token.access != null) return false;
-            if (refresh != null ? !refresh.equals(token.refresh) : token.refresh != null) return false;
+            if (refresh != null ? !refresh.equals(token.refresh) : token.refresh != null)
+                return false;
             if (scope != null ? !scope.equals(token.scope) : token.scope != null) return false;
             return true;
         } else {

@@ -9,5 +9,6 @@ public class AppEntity {
     public String external_url;
     public String creator;
 
-    public AppEntity(){}
+    public AppEntity() {
+    }
 }
